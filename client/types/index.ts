@@ -30,6 +30,23 @@ export interface VanillaStoryEvent {
   };
 }
 
+export interface FEKeyItem {
+  id: string;
+  name: string;
+  used_for: string;
+}
+
+export interface FEKeyItemLocation {
+  id: string;
+  type: 'main_quest' | 'summon_quest' | 'miab_chests';
+  location: string;
+  check: string;
+  miab_chest_count?: number;
+  conditions?: {
+    free_item_enabled?: boolean;
+  };
+}
+
 export interface RunFlags {
   summonQuestRewards: boolean;
   lunarSubterraneBosses: boolean;

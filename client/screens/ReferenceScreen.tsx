@@ -11,7 +11,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { useTheme } from "@/hooks/useTheme";
 import { Spacing } from "@/constants/theme";
 import { ReferenceStackParamList } from "@/navigation/ReferenceStackNavigator";
-import { getVanillaStory, getShops, getKeyItems } from "@/lib/data";
+import { getVanillaStory, getShops, getKeyItems, getFEKeyItems, getFEKeyItemLocations } from "@/lib/data";
 
 type NavigationProp = NativeStackNavigationProp<ReferenceStackParamList>;
 
@@ -23,7 +23,9 @@ export default function ReferenceScreen() {
 
   const storyCount = getVanillaStory().length;
   const shopCount = getShops().length;
-  const keyItemCount = getKeyItems().length;
+  const vanillaKeyItemCount = getKeyItems().length;
+  const feKeyItemCount = getFEKeyItems().length;
+  const feKeyItemLocationCount = getFEKeyItemLocations().length;
 
   return (
     <ScrollView
@@ -78,15 +80,55 @@ export default function ReferenceScreen() {
 
       <Card
         elevation={1}
-        onPress={() => navigation.navigate("KeyItemLocations")}
+        onPress={() => navigation.navigate("VanillaKeyItemLocations")}
+        style={styles.card}
+      >
+        <Feather name="map-pin" size={24} color={theme.primary} />
+        <ThemedText type="body" style={styles.cardTitle}>
+          Vanilla Key Items and Locations
+        </ThemedText>
+        <ThemedText type="small" style={{ color: theme.textSecondary }}>
+          {vanillaKeyItemCount} locations
+        </ThemedText>
+        <Feather
+          name="chevron-right"
+          size={20}
+          color={theme.textSecondary}
+          style={styles.chevron}
+        />
+      </Card>
+
+      <Card
+        elevation={1}
+        onPress={() => navigation.navigate("FEKeyItems")}
+        style={styles.card}
+      >
+        <Feather name="key" size={24} color={theme.primary} />
+        <ThemedText type="body" style={styles.cardTitle}>
+          FE Key Items
+        </ThemedText>
+        <ThemedText type="small" style={{ color: theme.textSecondary }}>
+          {feKeyItemCount} items
+        </ThemedText>
+        <Feather
+          name="chevron-right"
+          size={20}
+          color={theme.textSecondary}
+          style={styles.chevron}
+        />
+      </Card>
+
+      <Card
+        elevation={1}
+        onPress={() => navigation.navigate("FEKeyItemLocations")}
         style={styles.card}
       >
         <Feather name="star" size={24} color={theme.primary} />
         <ThemedText type="body" style={styles.cardTitle}>
-          Key Item Locations
+          FE Key Item Locations
         </ThemedText>
         <ThemedText type="small" style={{ color: theme.textSecondary }}>
-          {keyItemCount} locations
+          {feKeyItemLocationCount} locations
         </ThemedText>
         <Feather
           name="chevron-right"

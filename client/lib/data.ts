@@ -1,7 +1,9 @@
-import { Shop, KeyItem, VanillaStoryEvent, RunFlags, ShopVisit, KeyItemCheck } from '@/types';
+import { Shop, KeyItem, VanillaStoryEvent, RunFlags, ShopVisit, KeyItemCheck, FEKeyItem, FEKeyItemLocation } from '@/types';
 import shopsData from '@/data/shops.json';
 import keyItemsData from '@/data/key-items.json';
 import vanillaStoryData from '@/data/vanilla-story.json';
+import feKeyItemsData from '@/data/fe-key-items.json';
+import feKeyItemLocationsData from '@/data/fe-key-item-locations.json';
 
 export function getShops(): Shop[] {
   return shopsData as Shop[];
@@ -13,6 +15,14 @@ export function getKeyItems(): KeyItem[] {
 
 export function getVanillaStory(): VanillaStoryEvent[] {
   return vanillaStoryData as VanillaStoryEvent[];
+}
+
+export function getFEKeyItems(): FEKeyItem[] {
+  return feKeyItemsData as FEKeyItem[];
+}
+
+export function getFEKeyItemLocations(): FEKeyItemLocation[] {
+  return feKeyItemLocationsData as FEKeyItemLocation[];
 }
 
 export function getShopsByLocation(): Map<string, Shop[]> {

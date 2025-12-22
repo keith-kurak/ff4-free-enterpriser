@@ -1,0 +1,82 @@
+[
+  {
+    "id": "package",
+    "name": "Package",
+    "used_for": "Triggering the Mist Cave mission and Mist Dragon"
+  },
+  {
+    "id": "sand_ruby",
+    "name": "Sand Ruby",
+    "used_for": "Curing Rosa in Kaipo"
+  },
+  {
+    "id": "legend_sword",
+    "name": "Legend Sword",
+    "used_for": "Cecil’s Paladin trial at Mt. Ordeals"
+  },
+  {
+    "id": "baron_key",
+    "name": "Baron Key",
+    "used_for": "Opening sealed areas of Baron Castle"
+  },
+  {
+    "id": "twin_harp",
+    "name": "Twin Harp",
+    "used_for": "Disabling the Dark Elf’s magnetic field"
+  },
+  {
+    "id": "earth_crystal",
+    "name": "Earth Crystal",
+    "used_for": "Story progression and Golbez’s crystal plot"
+  },
+  {
+    "id": "magma_key",
+    "name": "Magma Key",
+    "used_for": "Opening the path to the Underworld"
+  },
+  {
+    "id": "tower_key",
+    "name": "Tower Key",
+    "used_for": "Opening sealed doors in the Tower of Babil"
+  },
+  {
+    "id": "luca_key",
+    "name": "Luca Key",
+    "used_for": "Activating the Super Cannon"
+  },
+  {
+    "id": "hook",
+    "name": "Hook",
+    "used_for": "Upgrading the airship to travel between worlds"
+  },
+  {
+    "id": "spoon",
+    "name": "Spoon",
+    "used_for": "Powerful throwing weapon; FE progression item; Edward can often equip this"
+  },
+  {
+    "id": "adamant",
+    "name": "Adamant",
+    "used_for": "Forging the Excalibur"
+  },
+  {
+    "id": "rat_tail",
+    "name": "Rat Tail",
+    "used_for": "Trading with the Adamant Gnome"
+  },
+  {
+    "id": "pink_tail",
+    "name": "Pink Tail",
+    "used_for": "Trading for the Adamant Armor"
+  },
+  {
+    "id": "darkness_crystal",
+    "name": "Darkness Crystal",
+    "used_for": "Golbez’s final crystal objective"
+  },
+  {
+    "id": "crystal",
+    "name": "Crystal",
+    "used_for": "Revealing and defeating Zeromus"
+  }
+]

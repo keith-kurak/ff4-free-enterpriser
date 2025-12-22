@@ -1,0 +1,172 @@
+[
+  {
+    "id": "baron_package",
+    "type": "main_quest",
+    "location": "Baron Castle",
+    "check": "Package chest"
+  },
+  {
+    "id": "antlion_sand_ruby",
+    "type": "main_quest",
+    "location": "Antlion Cave",
+    "check": "Antlion reward"
+  },
+  {
+    "id": "ordeals_legend_sword",
+    "type": "main_quest",
+    "location": "Mt. Ordeals",
+    "check": "Legend Sword chest"
+  },
+  {
+    "id": "baron_baron_key",
+    "type": "main_quest",
+    "location": "Baron Castle",
+    "check": "Baron Key"
+  },
+  {
+    "id": "toroia_edward_free",
+    "type": "main_quest",
+    "location": "Toroia Castle",
+    "check": "Edward in bed",
+    "conditions": { "free_item_enabled": true }
+  },
+  {
+    "id": "mist_rydia_mom_free",
+    "type": "main_quest",
+    "location": "Mist Village",
+    "check": "Rydia's mom",
+    "conditions": { "free_item_enabled": false }
+  },
+  {
+    "id": "toroia_earth_crystal",
+    "type": "main_quest",
+    "location": "Toroia Castle",
+    "check": "Earth Crystal room"
+  },
+  {
+    "id": "agart_magma_key",
+    "type": "main_quest",
+    "location": "Agart",
+    "check": "Magma Key NPC"
+  },
+  {
+    "id": "babil_tower_key",
+    "type": "main_quest",
+    "location": "Tower of Babil",
+    "check": "Dr. Lugae reward"
+  },
+  {
+    "id": "dwarf_luca_key",
+    "type": "main_quest",
+    "location": "Dwarf Castle",
+    "check": "Luca NPC"
+  },
+  {
+    "id": "dwarf_hook",
+    "type": "main_quest",
+    "location": "Dwarf Castle",
+    "check": "Cid airship modification"
+  },
+  {
+    "id": "sylph_spoon",
+    "type": "main_quest",
+    "location": "Sylph Cave",
+    "check": "Treasure chest"
+  },
+  {
+    "id": "adamant_grotto",
+    "type": "main_quest",
+    "location": "Adamant Cave",
+    "check": "Adamant chest"
+  },
+  {
+    "id": "bahamut_rat_tail",
+    "type": "main_quest",
+    "location": "Bahamut Cave",
+    "check": "Rat Tail chest"
+  },
+  {
+    "id": "lunar_pink_tail",
+    "type": "main_quest",
+    "location": "Lunar Subterrane",
+    "check": "Pink Puff drop"
+  },
+  {
+    "id": "sealed_cave_dark_crystal",
+    "type": "main_quest",
+    "location": "Sealed Cave",
+    "check": "Darkness Crystal chest"
+  },
+  {
+    "id": "zemus_crystal",
+    "type": "main_quest",
+    "location": "Lunar Subterrane",
+    "check": "Zemus defeat"
+  },
+  {
+    "id": "feymarch_asura",
+    "type": "summon_quest",
+    "location": "Feymarch",
+    "check": "Asura fight"
+  },
+  {
+    "id": "feymarch_leviathan",
+    "type": "summon_quest",
+    "location": "Feymarch",
+    "check": "Leviathan fight"
+  },
+  {
+    "id": "sylph_quest",
+    "type": "summon_quest",
+    "location": "Sylph Cave",
+    "check": "Sylph Queen"
+  },
+  {
+    "id": "odin",
+    "type": "summon_quest",
+    "location": "Baron Castle",
+    "check": "Odin fight"
+  },
+  {
+    "id": "bahamut",
+    "type": "summon_quest",
+    "location": "Bahamut Cave",
+    "check": "Bahamut fight"
+  },
+  {
+    "id": "miab_eblan_castle",
+    "type": "miab_chests",
+    "location": "Eblan Castle",
+    "miab_chest_count": 3
+  },
+  {
+    "id": "miab_toroia_castle",
+    "type": "miab_chests",
+    "location": "Toroia Castle",
+    "miab_chest_count": 9
+  },
+  {
+    "id": "miab_tower_of_zot",
+    "type": "miab_chests",
+    "location": "Tower of Zot",
+    "miab_chest_count": 1
+  },
+  {
+    "id": "miab_lower_babil",
+    "type": "miab_chests",
+    "location": "Lower Babil",
+    "miab_chest_count": 4
+  },
+  {
+    "id": "miab_sylph_cave",
+    "type": "miab_chests",
+    "location": "Sylph Cave",
+    "miab_chest_count": 7
+  },
+  {
+    "id": "miab_lunar_sub",
+    "type": "miab_chests",
+    "location": "Lunar Subterrane",
+    "miab_chest_count": 8
+  }
+]

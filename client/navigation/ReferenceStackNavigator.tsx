@@ -5,13 +5,17 @@ import ReferenceScreen from "@/screens/ReferenceScreen";
 import VanillaStoryScreen from "@/screens/VanillaStoryScreen";
 import ShopLocationsScreen from "@/screens/ShopLocationsScreen";
 import KeyItemLocationsScreen from "@/screens/KeyItemLocationsScreen";
+import FEKeyItemsScreen from "@/screens/FEKeyItemsScreen";
+import FEKeyItemLocationsScreen from "@/screens/FEKeyItemLocationsScreen";
 import { useScreenOptions } from "@/hooks/useScreenOptions";
 
 export type ReferenceStackParamList = {
   Reference: undefined;
   VanillaStory: undefined;
   ShopLocations: undefined;
-  KeyItemLocations: undefined;
+  VanillaKeyItemLocations: undefined;
+  FEKeyItems: undefined;
+  FEKeyItemLocations: undefined;
 };
 
 const Stack = createNativeStackNavigator<ReferenceStackParamList>();
@@ -43,10 +47,24 @@ export default function ReferenceStackNavigator() {
         }}
       />
       <Stack.Screen
-        name="KeyItemLocations"
+        name="VanillaKeyItemLocations"
         component={KeyItemLocationsScreen}
         options={{
-          headerTitle: "Key Item Locations",
+          headerTitle: "Vanilla Key Items",
+        }}
+      />
+      <Stack.Screen
+        name="FEKeyItems"
+        component={FEKeyItemsScreen}
+        options={{
+          headerTitle: "FE Key Items",
+        }}
+      />
+      <Stack.Screen
+        name="FEKeyItemLocations"
+        component={FEKeyItemLocationsScreen}
+        options={{
+          headerTitle: "FE Key Item Locations",
         }}
       />
     </Stack.Navigator>
