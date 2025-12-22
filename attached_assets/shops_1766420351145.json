@@ -1,0 +1,83 @@
+[
+  /* =========================
+     BARON REGION
+     ========================= */
+
+  { "id": "baron_weapon", "type": "weapon", "location": "Baron", "name": "Weapon Shop" },
+  { "id": "baron_armor", "type": "armor", "location": "Baron", "name": "Armor Shop" },
+  { "id": "baron_item", "type": "item", "location": "Baron", "name": "Item Shop" },
+
+  /* =========================
+     MIST / KAIPO / DAMCYAN
+     ========================= */
+
+  { "id": "mist_weapon", "type": "weapon", "location": "Mist", "name": "Weapon Shop" },
+  { "id": "mist_armor", "type": "armor", "location": "Mist", "name": "Armor Shop" },
+
+  { "id": "kaipo_weapon", "type": "weapon", "location": "Kaipo", "name": "Weapon Shop" },
+  { "id": "kaipo_armor", "type": "armor", "location": "Kaipo", "name": "Armor Shop" },
+  { "id": "kaipo_item", "type": "item", "location": "Kaipo", "name": "Item Shop" },
+
+  { "id": "damcyan_weapon", "type": "weapon", "location": "Damcyan", "name": "Weapon Shop" },
+  { "id": "damcyan_armor", "type": "armor", "location": "Damcyan", "name": "Armor Shop" },
+  { "id": "damcyan_item", "type": "item", "location": "Damcyan", "name": "Item Shop" },
+
+  /* =========================
+     FABUL / MYTHRIL AREA
+     ========================= */
+
+  { "id": "fabul_weapon_armor", "type": "weapon_armor", "location": "Fabul", "name": "Weapon & Armor Shop" },
+  { "id": "fabul_item", "type": "item", "location": "Fabul", "name": "Item Shop" },
+
+  { "id": "mythril_weapon", "type": "weapon", "location": "Mythril", "name": "Weapon Shop" },
+  { "id": "mythril_armor", "type": "armor", "location": "Mythril", "name": "Armor Shop" },
+  { "id": "mythril_item", "type": "item", "location": "Mythril", "name": "Item Shop" },
+
+  /* =========================
+     TOROIA / SILVERA
+     ========================= */
+
+  { "id": "toroia_weapon", "type": "weapon", "location": "Toroia", "name": "Weapon Shop" },
+  { "id": "toroia_armor", "type": "armor", "location": "Toroia", "name": "Armor Shop" },
+  { "id": "toroia_item", "type": "item", "location": "Toroia", "name": "Item Shop" },
+
+  { "id": "silvera_weapon", "type": "weapon", "location": "Silvera", "name": "Weapon Shop" },
+  { "id": "silvera_armor", "type": "armor", "location": "Silvera", "name": "Armor Shop" },
+  { "id": "silvera_item", "type": "item", "location": "Silvera", "name": "Item Shop" },
+
+  /* =========================
+     AGART / UNDERWORLD
+     ========================= */
+
+  { "id": "agart_item", "type": "item", "location": "Agart", "name": "Item Shop" },
+
+  { "id": "dwarf_weapon", "type": "weapon", "location": "Dwarf Castle", "name": "Weapon Shop" },
+  { "id": "dwarf_armor", "type": "armor", "location": "Dwarf Castle", "name": "Armor Shop" },
+  { "id": "dwarf_item", "type": "item", "location": "Dwarf Castle", "name": "Item Shop" },
+
+  { "id": "tomra_weapon", "type": "weapon", "location": "Tomra", "name": "Weapon Shop" },
+  { "id": "tomra_armor", "type": "armor", "location": "Tomra", "name": "Armor Shop" },
+  { "id": "tomra_item", "type": "item", "location": "Tomra", "name": "Item Shop" },
+
+  /* =========================
+     EBLA / SEALED CAVE AREA
+     ========================= */
+
+  { "id": "eblan_weapon", "type": "weapon", "location": "Eblan", "name": "Weapon Shop" },
+  { "id": "eblan_armor", "type": "armor", "location": "Eblan", "name": "Armor Shop" },
+  { "id": "eblan_item", "type": "item", "location": "Eblan", "name": "Item Shop" },
+
+  /* =========================
+     MYSIDIA
+     ========================= */
+
+  { "id": "mysidia_weapon", "type": "weapon", "location": "Mysidia", "name": "Weapon Shop" },
+  { "id": "mysidia_armor", "type": "armor", "location": "Mysidia", "name": "Armor Shop" },
+  { "id": "mysidia_item", "type": "item", "location": "Mysidia", "name": "Item Shop" },
+
+  /* =========================
+     MOON
+     ========================= */
+
+  { "id": "hummingway_item", "type": "item", "location": "Hummingway's Cave", "name": "Item Shop" }
+]
