@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { View, StyleSheet, TextInput, Pressable, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { HeaderButton } from "@react-navigation/elements";
 import { Feather } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 
@@ -40,24 +39,11 @@ export default function CompleteRunScreen() {
     setActiveRun(run);
   };
 
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => (
-        <HeaderButton onPress={() => navigation.goBack()}>
-          <ThemedText style={{ color: theme.primary }}>Cancel</ThemedText>
-        </HeaderButton>
-      ),
-      headerRight: () => (
-        <HeaderButton onPress={handleSave}>
-          <ThemedText style={{ color: theme.primary, fontWeight: "600" }}>
-            Save
-          </ThemedText>
-        </HeaderButton>
-      ),
-    });
-  }, [navigation, theme, completionTime, keyItemsCollected, treasureChests, characterCount, selectedCharacters, activeRun]);
+  const handleCancel = useCallback(() => {
+    navigation.goBack();
+  }, [navigation]);
 
-  const handleSave = async () => {
+  const handleSave = useCallback(async () => {
     if (!activeRun) return;
 
     if (!completionTime.trim()) {
@@ -85,7 +71,24 @@ export default function CompleteRunScreen() {
     await saveCompletedRun(completedRun);
     await clearActiveRun();
     navigation.goBack();
-  };
+  }, [activeRun, completionTime, keyItemsCollected, treasureChests, characterCount, selectedCharacters, navigation]);
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <Pressable onPress={handleCancel} hitSlop={8} style={{ paddingHorizontal: 8 }}>
+          <ThemedText style={{ color: theme.primary }}>Cancel</ThemedText>
+        </Pressable>
+      ),
+      headerRight: () => (
+        <Pressable onPress={handleSave} hitSlop={8} style={{ paddingHorizontal: 8 }}>
+          <ThemedText style={{ color: theme.primary, fontWeight: "600" }}>
+            Save
+          </ThemedText>
+        </Pressable>
+      ),
+    });
+  }, [navigation, theme, handleCancel, handleSave]);
 
   const toggleCharacter = (character: Character) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);

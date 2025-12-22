@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import { View, StyleSheet, TextInput, Switch, Alert } from "react-native";
+import React, { useState, useCallback } from "react";
+import { View, StyleSheet, TextInput, Switch, Alert, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { HeaderButton } from "@react-navigation/elements";
 import * as Haptics from "expo-haptics";
 
 import { ThemedText } from "@/components/ThemedText";
@@ -32,24 +31,11 @@ export default function NewRunScreen() {
     freeItemToroia: true,
   });
 
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => (
-        <HeaderButton onPress={() => navigation.goBack()}>
-          <ThemedText style={{ color: theme.primary }}>Cancel</ThemedText>
-        </HeaderButton>
-      ),
-      headerRight: () => (
-        <HeaderButton onPress={handleStartRun}>
-          <ThemedText style={{ color: theme.primary, fontWeight: "600" }}>
-            Start
-          </ThemedText>
-        </HeaderButton>
-      ),
-    });
-  }, [navigation, theme, name, flags]);
+  const handleCancel = useCallback(() => {
+    navigation.goBack();
+  }, [navigation]);
 
-  const handleStartRun = async () => {
+  const handleStartRun = useCallback(async () => {
     if (!name.trim()) {
       Alert.alert("Error", "Please enter a name for your run");
       return;
@@ -68,7 +54,24 @@ export default function NewRunScreen() {
 
     await saveActiveRun(newRun);
     navigation.goBack();
-  };
+  }, [name, flags, navigation]);
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <Pressable onPress={handleCancel} hitSlop={8} style={{ paddingHorizontal: 8 }}>
+          <ThemedText style={{ color: theme.primary }}>Cancel</ThemedText>
+        </Pressable>
+      ),
+      headerRight: () => (
+        <Pressable onPress={handleStartRun} hitSlop={8} style={{ paddingHorizontal: 8 }}>
+          <ThemedText style={{ color: theme.primary, fontWeight: "600" }}>
+            Start
+          </ThemedText>
+        </Pressable>
+      ),
+    });
+  }, [navigation, theme, handleCancel, handleStartRun]);
 
   const toggleFlag = (key: keyof RunFlags) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
