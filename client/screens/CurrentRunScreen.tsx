@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { View, ScrollView, StyleSheet, RefreshControl } from "react-native";
+import { View, ScrollView, StyleSheet, RefreshControl, Alert } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useHeaderHeight } from "@react-navigation/elements";
@@ -104,10 +104,23 @@ export default function CurrentRunScreen() {
     navigation.navigate("CompleteRun");
   };
 
-  const handleCancelRun = async () => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-    await clearActiveRun();
-    setActiveRun(null);
+  const handleCancelRun = () => {
+    Alert.alert(
+      "Cancel Run",
+      "Are you sure you want to cancel this run? All progress will be lost.",
+      [
+        { text: "Keep Running", style: "cancel" },
+        {
+          text: "Cancel Run",
+          style: "destructive",
+          onPress: async () => {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+            await clearActiveRun();
+            setActiveRun(null);
+          },
+        },
+      ]
+    );
   };
 
   if (loading) {
