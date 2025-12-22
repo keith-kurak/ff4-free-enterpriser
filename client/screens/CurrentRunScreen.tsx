@@ -83,6 +83,23 @@ export default function CurrentRunScreen() {
     await saveActiveRun(updatedRun);
   };
 
+  const handleKeyItemReturnToggle = async (keyItemId: string) => {
+    if (!activeRun) return;
+
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+
+    const updatedChecks = activeRun.keyItemChecks.map((kic) => {
+      if (kic.keyItemId === keyItemId) {
+        return { ...kic, returnTo: !kic.returnTo };
+      }
+      return kic;
+    });
+
+    const updatedRun = { ...activeRun, keyItemChecks: updatedChecks };
+    setActiveRun(updatedRun);
+    await saveActiveRun(updatedRun);
+  };
+
   const handleCompleteRun = () => {
     navigation.navigate("CompleteRun");
   };
@@ -189,7 +206,14 @@ export default function CurrentRunScreen() {
         </ThemedText>
       </View>
 
-      <CollapsibleSection title="Shops" defaultExpanded>
+      <View style={styles.instructionNote}>
+        <Feather name="info" size={14} color={theme.textSecondary} />
+        <ThemedText type="small" style={{ color: theme.textSecondary }}>
+          Long-press any item to mark it as "return later"
+        </ThemedText>
+      </View>
+
+      <CollapsibleSection title="Shops">
         {shopLocations.map((location) => {
           const shops = shopsByLocation.get(location) || [];
           return (
@@ -208,9 +232,9 @@ export default function CurrentRunScreen() {
                     label={shop.name}
                     checked={visit?.visited || false}
                     onToggle={() => handleShopToggle(shop.id, "visited")}
-                    showReturn
+                    showReturn={visit?.returnTo || false}
                     returnChecked={visit?.returnTo || false}
-                    onReturnToggle={() => handleShopToggle(shop.id, "returnTo")}
+                    onLongPress={() => handleShopToggle(shop.id, "returnTo")}
                   />
                 );
               })}
@@ -233,7 +257,7 @@ export default function CurrentRunScreen() {
               {items.map((item) => {
                 const check = getKeyItemCheck(item.id);
                 const label = item.miab_chest_count
-                  ? `${item.check} (${item.miab_chest_count} chests)`
+                  ? `${item.miab_chest_count} monster-in-a-box chests`
                   : item.check;
                 return (
                   <CheckboxRow
@@ -241,6 +265,9 @@ export default function CurrentRunScreen() {
                     label={label}
                     checked={check?.checked || false}
                     onToggle={() => handleKeyItemToggle(item.id)}
+                    showReturn={check?.returnTo || false}
+                    returnChecked={check?.returnTo || false}
+                    onLongPress={() => handleKeyItemReturnToggle(item.id)}
                   />
                 );
               })}
@@ -328,5 +355,10 @@ const styles = StyleSheet.create({
   },
   cancelButton: {
     paddingHorizontal: Spacing["3xl"],
+  },
+  instructionNote: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: Spacing.xs,
   },
 });

@@ -12,7 +12,7 @@ interface CheckboxRowProps {
   onToggle: () => void;
   showReturn?: boolean;
   returnChecked?: boolean;
-  onReturnToggle?: () => void;
+  onLongPress?: () => void;
 }
 
 export function CheckboxRow({
@@ -21,14 +21,16 @@ export function CheckboxRow({
   onToggle,
   showReturn = false,
   returnChecked = false,
-  onReturnToggle,
+  onLongPress,
 }: CheckboxRowProps) {
   const { theme } = useTheme();
 
   return (
-    <View style={[styles.container, { borderBottomColor: theme.border }]}>
+    <View style={[styles.container, { borderBottomColor: theme.border }, showReturn && { backgroundColor: theme.warning + "0D" }]}>
       <Pressable
         onPress={onToggle}
+        onLongPress={onLongPress}
+        delayLongPress={300}
         style={({ pressed }) => [
           styles.checkboxArea,
           pressed && { opacity: 0.7 },
@@ -56,24 +58,9 @@ export function CheckboxRow({
       </Pressable>
 
       {showReturn ? (
-        <Pressable
-          onPress={onReturnToggle}
-          style={({ pressed }) => [
-            styles.returnButton,
-            {
-              backgroundColor: returnChecked ? theme.warning + "1A" : theme.backgroundDefault,
-              borderColor: returnChecked ? theme.warning : theme.border,
-            },
-            pressed && { opacity: 0.7 },
-          ]}
-          hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-        >
-          <Feather
-            name="repeat"
-            size={12}
-            color={returnChecked ? theme.warning : theme.textSecondary}
-          />
-        </Pressable>
+        <View style={[styles.returnIndicator, { backgroundColor: theme.warning }]}>
+          <Feather name="corner-down-left" size={12} color="#fff" />
+        </View>
       ) : null}
     </View>
   );
@@ -104,11 +91,10 @@ const styles = StyleSheet.create({
   label: {
     flex: 1,
   },
-  returnButton: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    borderWidth: 1,
+  returnIndicator: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
     justifyContent: "center",
     alignItems: "center",
     marginLeft: Spacing.sm,

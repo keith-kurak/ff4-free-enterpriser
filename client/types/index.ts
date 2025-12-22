@@ -65,6 +65,7 @@ export interface ShopVisit {
 export interface KeyItemCheck {
   keyItemId: string;
   checked: boolean;
+  returnTo?: boolean;
 }
 
 export interface CompletedRun {
