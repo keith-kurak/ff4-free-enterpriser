@@ -1,7 +1,7 @@
 import React from "react";
 import { View, SectionList, StyleSheet } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
 
 import { ThemedText } from "@/components/ThemedText";
@@ -25,7 +25,7 @@ const getTypeInfo = (type: string) => {
 
 export default function FEKeyItemLocationsScreen() {
   const headerHeight = useHeaderHeight();
-  const insets = useSafeAreaInsets();
+  const tabBarHeight = useBottomTabBarHeight();
   const { theme } = useTheme();
 
   const locations = getFEKeyItemLocations();
@@ -93,10 +93,10 @@ export default function FEKeyItemLocationsScreen() {
         styles.content,
         {
           paddingTop: headerHeight + Spacing.xl,
-          paddingBottom: insets.bottom + Spacing.xl,
+          paddingBottom: tabBarHeight + Spacing.xl,
         },
       ]}
-      scrollIndicatorInsets={{ bottom: insets.bottom }}
+      scrollIndicatorInsets={{ bottom: tabBarHeight }}
       sections={sections}
       keyExtractor={(item) => item.id}
       renderItem={renderItem}

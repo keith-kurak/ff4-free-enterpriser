@@ -1,7 +1,7 @@
 import React from "react";
 import { View, SectionList, StyleSheet } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
 
 import { ThemedText } from "@/components/ThemedText";
@@ -27,7 +27,7 @@ const getShopIcon = (type: string) => {
 
 export default function ShopLocationsScreen() {
   const headerHeight = useHeaderHeight();
-  const insets = useSafeAreaInsets();
+  const tabBarHeight = useBottomTabBarHeight();
   const { theme } = useTheme();
 
   const shopsByLocation = getShopsByLocation();
@@ -71,10 +71,10 @@ export default function ShopLocationsScreen() {
         styles.content,
         {
           paddingTop: headerHeight + Spacing.xl,
-          paddingBottom: insets.bottom + Spacing.xl,
+          paddingBottom: tabBarHeight + Spacing.xl,
         },
       ]}
-      scrollIndicatorInsets={{ bottom: insets.bottom }}
+      scrollIndicatorInsets={{ bottom: tabBarHeight }}
       sections={sections}
       keyExtractor={(item) => item.id}
       renderItem={renderItem}

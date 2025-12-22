@@ -1,7 +1,7 @@
 import React from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
 
 import { ThemedText } from "@/components/ThemedText";
@@ -39,7 +39,7 @@ const getEventColor = (type: string, theme: any) => {
 
 export default function VanillaStoryScreen() {
   const headerHeight = useHeaderHeight();
-  const insets = useSafeAreaInsets();
+  const tabBarHeight = useBottomTabBarHeight();
   const { theme } = useTheme();
 
   const events = getVanillaStory();
@@ -97,10 +97,10 @@ export default function VanillaStoryScreen() {
         styles.content,
         {
           paddingTop: headerHeight + Spacing.xl,
-          paddingBottom: insets.bottom + Spacing.xl,
+          paddingBottom: tabBarHeight + Spacing.xl,
         },
       ]}
-      scrollIndicatorInsets={{ bottom: insets.bottom }}
+      scrollIndicatorInsets={{ bottom: tabBarHeight }}
       data={events}
       keyExtractor={(item) => item.seq.toString()}
       renderItem={renderItem}
