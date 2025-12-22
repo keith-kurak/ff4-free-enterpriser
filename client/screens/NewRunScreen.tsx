@@ -14,6 +14,7 @@ import { CurrentRunStackParamList } from "@/navigation/CurrentRunStackNavigator"
 import { RunFlags } from "@/types";
 import { saveActiveRun } from "@/lib/storage";
 import { initializeShopVisits, initializeKeyItemChecks, generateRunId } from "@/lib/data";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 type NavigationProp = NativeStackNavigationProp<CurrentRunStackParamList>;
 
@@ -23,6 +24,8 @@ export default function NewRunScreen() {
   const insets = useSafeAreaInsets();
   const { theme } = useTheme();
 
+  console.log("blah")
+
   const [name, setName] = useState("");
   const [flags, setFlags] = useState<RunFlags>({
     summonQuestRewards: false,
@@ -31,8 +34,11 @@ export default function NewRunScreen() {
     freeItemToroia: true,
   });
 
+  const [shouldLeaveScreen, setShouldLeaveScreen] = useState(false);
+
   const handleCancel = useCallback(() => {
-    navigation.goBack();
+    console.log("Cancel pressed")
+    setShouldLeaveScreen(true)
   }, [navigation]);
 
   const handleStartRun = useCallback(async () => {
@@ -53,22 +59,29 @@ export default function NewRunScreen() {
     };
 
     await saveActiveRun(newRun);
-    navigation.goBack();
+    setShouldLeaveScreen(true)
   }, [name, flags, navigation]);
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
+    if (shouldLeaveScreen) {
+      console.log("Leaving screen")
+      navigation.goBack();
+    }
+  }, [shouldLeaveScreen, navigation])
+
+  React.useEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
-        <Pressable onPress={handleCancel} hitSlop={8} style={{ paddingHorizontal: 8 }}>
+        <TouchableOpacity onPress={handleCancel} hitSlop={8} style={{ paddingHorizontal: 8 }}>
           <ThemedText style={{ color: theme.primary }}>Cancel</ThemedText>
-        </Pressable>
+        </TouchableOpacity>
       ),
       headerRight: () => (
-        <Pressable onPress={handleStartRun} hitSlop={8} style={{ paddingHorizontal: 8 }}>
+        <TouchableOpacity onPress={handleStartRun} hitSlop={8} style={{ paddingHorizontal: 8 }}>
           <ThemedText style={{ color: theme.primary, fontWeight: "600" }}>
             Start
           </ThemedText>
-        </Pressable>
+        </TouchableOpacity>
       ),
     });
   }, [navigation, theme, handleCancel, handleStartRun]);

@@ -14,6 +14,7 @@ import { Spacing, BorderRadius } from "@/constants/theme";
 import { CurrentRunStackParamList } from "@/navigation/CurrentRunStackNavigator";
 import { ActiveRun, CompletedRun, CHARACTERS, Character } from "@/types";
 import { getActiveRun, clearActiveRun, saveCompletedRun } from "@/lib/storage";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 type NavigationProp = NativeStackNavigationProp<CurrentRunStackParamList>;
 
@@ -76,16 +77,16 @@ export default function CompleteRunScreen() {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
-        <Pressable onPress={handleCancel} hitSlop={8} style={{ paddingHorizontal: 8 }}>
+        <TouchableOpacity onPress={handleCancel} hitSlop={8} style={{ paddingHorizontal: 8 }}>
           <ThemedText style={{ color: theme.primary }}>Cancel</ThemedText>
-        </Pressable>
+        </TouchableOpacity>
       ),
       headerRight: () => (
-        <Pressable onPress={handleSave} hitSlop={8} style={{ paddingHorizontal: 8 }}>
+        <TouchableOpacity onPress={handleSave} hitSlop={8} style={{ paddingHorizontal: 8 }}>
           <ThemedText style={{ color: theme.primary, fontWeight: "600" }}>
             Save
           </ThemedText>
-        </Pressable>
+        </TouchableOpacity>
       ),
     });
   }, [navigation, theme, handleCancel, handleSave]);
