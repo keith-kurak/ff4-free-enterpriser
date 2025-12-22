@@ -16,7 +16,7 @@ import { useTheme } from "@/hooks/useTheme";
 import { Spacing } from "@/constants/theme";
 import { CurrentRunStackParamList } from "@/navigation/CurrentRunStackNavigator";
 import { ActiveRun, Shop, FEKeyItemLocation } from "@/types";
-import { getActiveRun, saveActiveRun } from "@/lib/storage";
+import { getActiveRun, saveActiveRun, clearActiveRun } from "@/lib/storage";
 import { getShopsByLocation, getShops, getFEKeyItemLocationsByLocation, getFEKeyItemLocations } from "@/lib/data";
 
 type NavigationProp = NativeStackNavigationProp<CurrentRunStackParamList>;
@@ -87,6 +87,12 @@ export default function CurrentRunScreen() {
     navigation.navigate("CompleteRun");
   };
 
+  const handleCancelRun = async () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    await clearActiveRun();
+    setActiveRun(null);
+  };
+
   if (loading) {
     return (
       <ThemedView style={[styles.container, { paddingTop: headerHeight }]}>
@@ -145,8 +151,8 @@ export default function CurrentRunScreen() {
     return allKeyItemLocations.find((ki) => ki.id === keyItemId);
   };
 
-  const shopLocations = Array.from(shopsByLocation.keys()).sort();
-  const keyItemLocations = Array.from(keyItemLocationsByLocation.keys()).sort();
+  const shopLocations = Array.from(shopsByLocation.keys());
+  const keyItemLocations = Array.from(keyItemLocationsByLocation.keys());
 
   return (
     <ScrollView
@@ -242,6 +248,17 @@ export default function CurrentRunScreen() {
           );
         })}
       </CollapsibleSection>
+
+      <View style={styles.cancelContainer}>
+        <Button
+          onPress={handleCancelRun}
+          variant="outline"
+          style={[styles.cancelButton, { borderColor: theme.danger }]}
+          textStyle={{ color: theme.danger }}
+        >
+          Cancel Run
+        </Button>
+      </View>
     </ScrollView>
   );
 }
@@ -304,5 +321,12 @@ const styles = StyleSheet.create({
   locationHeader: {
     marginBottom: Spacing.xs,
     fontWeight: "600",
+  },
+  cancelContainer: {
+    marginTop: Spacing.xl,
+    alignItems: "center",
+  },
+  cancelButton: {
+    paddingHorizontal: Spacing["3xl"],
   },
 });

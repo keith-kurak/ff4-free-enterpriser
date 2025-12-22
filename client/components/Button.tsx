@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { StyleSheet, Pressable, ViewStyle, StyleProp } from "react-native";
+import { StyleSheet, Pressable, ViewStyle, StyleProp, TextStyle } from "react-native";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -15,7 +15,9 @@ interface ButtonProps {
   onPress?: () => void;
   children: ReactNode;
   style?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
   disabled?: boolean;
+  variant?: "filled" | "outline";
 }
 
 const springConfig: WithSpringConfig = {
@@ -32,7 +34,9 @@ export function Button({
   onPress,
   children,
   style,
+  textStyle,
   disabled = false,
+  variant = "filled",
 }: ButtonProps) {
   const { theme } = useTheme();
   const scale = useSharedValue(1);
@@ -53,6 +57,8 @@ export function Button({
     }
   };
 
+  const isOutline = variant === "outline";
+
   return (
     <AnimatedPressable
       onPress={disabled ? undefined : onPress}
@@ -62,7 +68,9 @@ export function Button({
       style={[
         styles.button,
         {
-          backgroundColor: theme.link,
+          backgroundColor: isOutline ? "transparent" : theme.link,
+          borderWidth: isOutline ? 1 : 0,
+          borderColor: isOutline ? theme.link : undefined,
           opacity: disabled ? 0.5 : 1,
         },
         style,
@@ -71,7 +79,11 @@ export function Button({
     >
       <ThemedText
         type="body"
-        style={[styles.buttonText, { color: theme.buttonText }]}
+        style={[
+          styles.buttonText,
+          { color: isOutline ? theme.link : theme.buttonText },
+          textStyle,
+        ]}
       >
         {children}
       </ThemedText>
