@@ -1,0 +1,416 @@
+[
+  {
+    "seq": 1,
+    "type": "story",
+    "title": "Opening: Baron’s Red Wings raid Mysidia",
+    "details": { "location": "Mysidia -> Baron", "notes": "Cecil questions the king’s orders and is punished with an exile mission." }
+  },
+  {
+    "seq": 2,
+    "type": "boss_battle",
+    "title": "Mist Dragon",
+    "details": { "location": "Mist Cave", "optional": false, "notes": "First boss; opens the path to Mist Village." }
+  },
+  {
+    "seq": 3,
+    "type": "story",
+    "title": "Mist Village tragedy; Rydia is encountered",
+    "details": { "location": "Mist Village", "notes": "The package ignites the village; a young summoner attacks in grief." }
+  },
+  {
+    "seq": 4,
+    "type": "character_leaves",
+    "title": "Kain leaves the party",
+    "details": { "location": "Mist Village", "notes": "Kain is separated after the aftermath in Mist." }
+  },
+  {
+    "seq": 5,
+    "type": "character_joins",
+    "title": "Rydia joins the party",
+    "details": { "location": "Mist Village", "notes": "Rydia joins Cecil as they flee." }
+  },
+  {
+    "seq": 6,
+    "type": "story",
+    "title": "Arrival at Kaipo; Rosa falls ill",
+    "details": { "location": "Kaipo", "notes": "Need the SandRuby to cure Rosa’s Desert Fever." }
+  },
+  {
+    "seq": 7,
+    "type": "character_joins",
+    "title": "Tellah joins the party",
+    "details": { "location": "Kaipo", "notes": "Tellah seeks his daughter and agrees to help." }
+  },
+  {
+    "seq": 8,
+    "type": "story",
+    "title": "Damcyan falls; Edward is found",
+    "details": { "location": "Damcyan", "notes": "The kingdom is attacked; Edward is devastated but determined." }
+  },
+  {
+    "seq": 9,
+    "type": "character_joins",
+    "title": "Edward joins the party",
+    "details": { "location": "Damcyan", "notes": "Edward accompanies the group to retrieve the SandRuby." }
+  },
+  {
+    "seq": 10,
+    "type": "boss_battle",
+    "title": "Octomamm",
+    "details": { "location": "Underground Waterway", "optional": false, "notes": "Guards the route through the waterway." }
+  },
+  {
+    "seq": 11,
+    "type": "boss_battle",
+    "title": "Antlion",
+    "details": { "location": "Antlion Cave", "optional": false, "notes": "Defeat to obtain the SandRuby." }
+  },
+  {
+    "seq": 12,
+    "type": "story",
+    "title": "Rosa is cured; the party heads toward Mysidia",
+    "details": { "location": "Kaipo -> desert crossing", "notes": "Edward typically parts ways after this stretch depending on version." }
+  },
+  {
+    "seq": 13,
+    "type": "character_joins",
+    "title": "Rosa joins the party",
+    "details": { "location": "Kaipo", "notes": "Rosa recovers and insists on traveling with Cecil." }
+  },
+  {
+    "seq": 14,
+    "type": "story",
+    "title": "Mysidia: trial and repentance; journey to Mt. Ordeals",
+    "details": { "location": "Mysidia", "notes": "Cecil is sent to become a Paladin." }
+  },
+  {
+    "seq": 15,
+    "type": "character_joins",
+    "title": "Palom joins the party",
+    "details": { "location": "Mysidia", "notes": "Assigned to watch Cecil (and ends up helping a lot)." }
+  },
+  {
+    "seq": 16,
+    "type": "character_joins",
+    "title": "Porom joins the party",
+    "details": { "location": "Mysidia", "notes": "Assigned alongside Palom." }
+  },
+  {
+    "seq": 17,
+    "type": "boss_battle",
+    "title": "Scarmiglione (first encounter)",
+    "details": { "location": "Mt. Ordeals", "optional": false, "notes": "First of the Four Fiends." }
+  },
+  {
+    "seq": 18,
+    "type": "boss_battle",
+    "title": "Scarmiglione (rematch)",
+    "details": { "location": "Mt. Ordeals (summit path)", "optional": false, "notes": "Second fight immediately after; ambush-style rematch." }
+  },
+  {
+    "seq": 19,
+    "type": "story",
+    "title": "Cecil becomes a Paladin",
+    "details": { "location": "Mt. Ordeals summit", "notes": "A turning point for Cecil’s identity and abilities." }
+  },
+  {
+    "seq": 20,
+    "type": "story",
+    "title": "Return to Baron; infiltration and confrontation",
+    "details": { "location": "Baron", "notes": "The king’s behavior is clearly unnatural." }
+  },
+  {
+    "seq": 21,
+    "type": "boss_battle",
+    "title": "Baigan",
+    "details": { "location": "Baron Castle (interior)", "optional": false, "notes": "Barrier-based fight en route to the throne room." }
+  },
+  {
+    "seq": 22,
+    "type": "boss_battle",
+    "title": "Cagnazzo",
+    "details": { "location": "Baron Castle (throne/escape)", "optional": false, "notes": "Second of the Four Fiends; water-themed battle." }
+  },
+  {
+    "seq": 23,
+    "type": "character_joins",
+    "title": "Kain rejoins the party",
+    "details": { "location": "Baron aftermath", "notes": "Kain returns, but his loyalties remain complicated." }
+  },
+  {
+    "seq": 24,
+    "type": "character_joins",
+    "title": "Cid joins the party",
+    "details": { "location": "Baron", "notes": "Cid helps secure an airship and pushes the quest forward." }
+  },
+  {
+    "seq": 25,
+    "type": "story",
+    "title": "Toroia and the Dark Elf threat; preparation for the Magnetic Cave",
+    "details": { "location": "Toroia", "notes": "The earth crystal is involved; metal gear becomes a hazard." }
+  },
+  {
+    "seq": 26,
+    "type": "boss_battle",
+    "title": "Dark Elf",
+    "details": { "location": "Magnetic Cave", "optional": false, "notes": "Magnetism disables metal equipment; key midgame boss." }
+  },
+  {
+    "seq": 27,
+    "type": "story",
+    "title": "Toward Zot: chasing Golbez’s plans",
+    "details": { "location": "Overworld route to Tower of Zot", "notes": "The party pushes to stop crystal collection." }
+  },
+  {
+    "seq": 28,
+    "type": "boss_battle",
+    "title": "Magus Sisters",
+    "details": { "location": "Tower of Zot", "optional": false, "notes": "Coordinated trio fight with combined attacks." }
+  },
+  {
+    "seq": 29,
+    "type": "boss_battle",
+    "title": "Barbariccia (Valvalis)",
+    "details": { "location": "Tower of Zot (upper levels)", "optional": false, "notes": "Third of the Four Fiends; wind-themed battle." }
+  },
+  {
+    "seq": 30,
+    "type": "character_leaves",
+    "title": "Kain leaves the party (again)",
+    "details": { "location": "Tower of Zot events", "notes": "Kain is pulled away under Golbez’s influence." }
+  },
+  {
+    "seq": 31,
+    "type": "character_leaves",
+    "title": "Palom leaves the party",
+    "details": { "location": "Tower of Zot escape", "notes": "Palom sacrifices himself to save the group (stone spell)." }
+  },
+  {
+    "seq": 32,
+    "type": "character_leaves",
+    "title": "Porom leaves the party",
+    "details": { "location": "Tower of Zot escape", "notes": "Porom sacrifices herself alongside Palom (stone spell)." }
+  },
+  {
+    "seq": 33,
+    "type": "story",
+    "title": "Fabul’s defense and the rise of new allies",
+    "details": { "location": "Fabul", "notes": "The party defends the kingdom and gains help for what’s next." }
+  },
+  {
+    "seq": 34,
+    "type": "character_joins",
+    "title": "Yang joins the party",
+    "details": { "location": "Fabul", "notes": "Master monk joins to protect Fabul and aid Cecil." }
+  },
+  {
+    "seq": 35,
+    "type": "boss_battle",
+    "title": "Mom Bomb",
+    "details": { "location": "Overworld (en route after Fabul, depending on version)", "optional": false, "notes": "Explodes into smaller bombs; iconic midgame boss." }
+  },
+  {
+    "seq": 36,
+    "type": "story",
+    "title": "Leviathan attack at sea; the party is scattered",
+    "details": { "location": "At sea", "notes": "A major reset of the party’s composition." }
+  },
+  {
+    "seq": 37,
+    "type": "character_leaves",
+    "title": "Rydia leaves the party",
+    "details": { "location": "At sea (Leviathan attack)", "notes": "Rydia is separated and presumed lost for a time." }
+  },
+  {
+    "seq": 38,
+    "type": "character_leaves",
+    "title": "Yang leaves the party",
+    "details": { "location": "At sea (Leviathan attack)", "notes": "Yang is lost in the chaos and later found elsewhere." }
+  },
+  {
+    "seq": 39,
+    "type": "story",
+    "title": "Cecil and Rosa reach the Underworld; dwarves and crystals",
+    "details": { "location": "Underworld -> Dwarf Castle", "notes": "You gain access to new areas and threats." }
+  },
+  {
+    "seq": 40,
+    "type": "boss_battle",
+    "title": "Golbez (Dwarf Castle confrontation)",
+    "details": { "location": "Dwarf Castle", "optional": false, "notes": "Major story boss; party is outmatched until help arrives." }
+  },
+  {
+    "seq": 41,
+    "type": "character_joins",
+    "title": "Rydia rejoins the party",
+    "details": { "location": "Dwarf Castle", "notes": "Rydia returns older and far stronger, turning the tide." }
+  },
+  {
+    "seq": 42,
+    "type": "story",
+    "title": "Tower of Babil campaign begins",
+    "details": { "location": "Underworld", "notes": "Push to stop crystal extraction and the giant project." }
+  },
+  {
+    "seq": 43,
+    "type": "boss_battle",
+    "title": "Dr. Lugae & Barnabas",
+    "details": { "location": "Tower of Babil", "optional": false, "notes": "Mechanized/experiment-themed boss sequence." }
+  },
+  {
+    "seq": 44,
+    "type": "character_leaves",
+    "title": "Cid leaves the party (sacrifice to seal the passage)",
+    "details": { "location": "Underworld (post-Babil events)", "notes": "Cid stays behind to help the party escape / stop pursuit." }
+  },
+  {
+    "seq": 45,
+    "type": "boss_battle",
+    "title": "Calbrena",
+    "details": { "location": "Tower of Babil (later section)", "optional": false, "notes": "Doll enemies combine into a single boss." }
+  },
+  {
+    "seq": 46,
+    "type": "boss_battle",
+    "title": "Rubicante",
+    "details": { "location": "Tower of Babil (fiend chamber)", "optional": false, "notes": "Fourth of the Four Fiends; fire-themed battle." }
+  },
+  {
+    "seq": 47,
+    "type": "story",
+    "title": "Return toward the overworld; pursuit of the remaining crystals",
+    "details": { "location": "Transitions between Underworld/Overworld", "notes": "The chase broadens across the world again." }
+  },
+  {
+    "seq": 48,
+    "type": "boss_battle",
+    "title": "Eblan King & Queen",
+    "details": { "location": "Eblan Cave", "optional": false, "notes": "Ninja-themed boss fight tied to Edge’s story." }
+  },
+  {
+    "seq": 49,
+    "type": "character_joins",
+    "title": "Edge joins the party",
+    "details": { "location": "Eblan Cave", "notes": "Prince of Eblan joins after confronting personal tragedy." }
+  },
+  {
+    "seq": 50,
+    "type": "boss_battle",
+    "title": "Demon Wall",
+    "details": { "location": "Sealed Cave", "optional": false, "notes": "Advances each turn; timing and damage matter." }
+  },
+  {
+    "seq": 51,
+    "type": "character_joins",
+    "title": "Cid rejoins the party",
+    "details": { "location": "Dwarf Castle (recovery)", "notes": "Cid survives and returns to help with late-game travel." }
+  },
+  {
+    "seq": 52,
+    "type": "character_joins",
+    "title": "Yang rejoins the party",
+    "details": { "location": "Sylph Cave", "notes": "Yang is found alive; typically returns after recovery." }
+  },
+  {
+    "seq": 53,
+    "type": "boss_battle",
+    "title": "Asura",
+    "details": { "location": "Land of Summons (Feymarch)", "optional": true, "notes": "First optional summon boss once you can reach the Land of Summons." }
+  },
+  {
+    "seq": 54,
+    "type": "boss_battle",
+    "title": "Leviathan",
+    "details": { "location": "Land of Summons (Feymarch)", "optional": true, "notes": "Optional summon boss; place here when first reachable (distinct from the story sea attack)." }
+  },
+  {
+    "seq": 55,
+    "type": "boss_battle",
+    "title": "Odin",
+    "details": { "location": "Baron Castle (basement/side area, version-dependent)", "optional": true, "notes": "Optional summon boss; listed at the first typical point you can access the required Baron side area." }
+  },
+  {
+    "seq": 56,
+    "type": "story",
+    "title": "The path to the Moon opens; truth of the Lunarians emerges",
+    "details": { "location": "Lunar Surface", "notes": "Major lore reveal; endgame arc begins." }
+  },
+  {
+    "seq": 57,
+    "type": "character_joins",
+    "title": "Fusoya joins the party",
+    "details": { "location": "Lunar Surface", "notes": "A Lunarian ally guides the party to the final conflict." }
+  },
+  {
+    "seq": 58,
+    "type": "boss_battle",
+    "title": "Bahamut",
+    "details": { "location": "Cave of Bahamut (Moon)", "optional": true, "notes": "Optional summon boss; first possible after reaching the Moon and accessing the cave." }
+  },
+  {
+    "seq": 59,
+    "type": "story",
+    "title": "Giant of Babil assault",
+    "details": { "location": "Giant of Babil", "notes": "Allied forces strike; the party fights inside the giant." }
+  },
+  {
+    "seq": 60,
+    "type": "boss_battle",
+    "title": "CPU",
+    "details": { "location": "Giant of Babil core", "optional": false, "notes": "Core system fight; strategy depends on targeting rules by version." }
+  },
+  {
+    "seq": 61,
+    "type": "character_leaves",
+    "title": "Fusoya leaves the party",
+    "details": { "location": "Post-Giant events", "notes": "Fusoya departs to confront the final evil alongside other key figures." }
+  },
+  {
+    "seq": 62,
+    "type": "story",
+    "title": "Descent into the Lunar Subterrane",
+    "details": { "location": "Lunar Subterrane", "notes": "Final dungeon; repeated trials and endgame bosses." }
+  },
+  {
+    "seq": 63,
+    "type": "boss_battle",
+    "title": "Scarmiglione (final dungeon rematch)",
+    "details": { "location": "Lunar Subterrane", "optional": false, "notes": "One of the Four Fiends rematches." }
+  },
+  {
+    "seq": 64,
+    "type": "boss_battle",
+    "title": "Cagnazzo (final dungeon rematch)",
+    "details": { "location": "Lunar Subterrane", "optional": false, "notes": "One of the Four Fiends rematches." }
+  },
+  {
+    "seq": 65,
+    "type": "boss_battle",
+    "title": "Barbariccia (final dungeon rematch)",
+    "details": { "location": "Lunar Subterrane", "optional": false, "notes": "One of the Four Fiends rematches." }
+  },
+  {
+    "seq": 66,
+    "type": "boss_battle",
+    "title": "Rubicante (final dungeon rematch)",
+    "details": { "location": "Lunar Subterrane", "optional": false, "notes": "One of the Four Fiends rematches." }
+  },
+  {
+    "seq": 67,
+    "type": "boss_battle",
+    "title": "Zemus",
+    "details": { "location": "Lunar Subterrane (deepest chamber)", "optional": false, "notes": "Final story confrontation begins." }
+  },
+  {
+    "seq": 68,
+    "type": "boss_battle",
+    "title": "Zeromus",
+    "details": { "location": "Lunar Subterrane (final)", "optional": false, "notes": "True final boss." }
+  },
+  {
+    "seq": 69,
+    "type": "story",
+    "title": "Ending: the world is saved; farewells and returns",
+    "details": { "location": "Epilogue", "notes": "Loose ends resolve; survivors reunite; kingdoms rebuild." }
+  }
+]
