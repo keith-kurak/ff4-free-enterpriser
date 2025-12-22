@@ -1,137 +1,136 @@
 [
   {
-    "id": "baron_package",
+    "id": "baron_start",
     "type": "main_quest",
     "location": "Baron Castle",
-    "check": "Package chest"
+    "check": "Opening cutscene starting item"
   },
   {
-    "id": "antlion_sand_ruby",
+    "id": "antlion_nest",
     "type": "main_quest",
-    "location": "Antlion Cave",
-    "check": "Antlion reward"
+    "location": "Antlion's Nest",
+    "check": "Complete the dungeon"
   },
   {
-    "id": "ordeals_legend_sword",
+    "id": "fabul_defense",
+    "type": "main_quest",
+    "location": "Fabul",
+    "check": "Defend Fabul"
+  },
+  {
+    "id": "ordeals_mirror",
     "type": "main_quest",
     "location": "Mt. Ordeals",
-    "check": "Legend Sword chest"
+    "check": "Enter the mirror room"
   },
   {
-    "id": "baron_baron_key",
+    "id": "baron_inn",
+    "type": "main_quest",
+    "location": "Baron Inn",
+    "check": "Defeat the bosses"
+  },
+  {
+    "id": "baron_liberation",
     "type": "main_quest",
     "location": "Baron Castle",
-    "check": "Baron Key"
+    "check": "Liberate the castle"
   },
   {
-    "id": "toroia_edward_free",
+    "id": "toroia_edward",
     "type": "main_quest",
     "location": "Toroia Castle",
-    "check": "Edward in bed",
+    "check": "Speak to Edward",
     "conditions": { "free_item_enabled": true }
   },
   {
-    "id": "mist_rydia_mom_free",
+    "id": "cave_magnes",
     "type": "main_quest",
-    "location": "Mist Village",
-    "check": "Rydia's mom",
-    "conditions": { "free_item_enabled": false }
+    "location": "Cave Magnes",
+    "check": "Complete the dungeon"
   },
   {
-    "id": "toroia_earth_crystal",
+    "id": "tower_zot",
     "type": "main_quest",
-    "location": "Toroia Castle",
-    "check": "Earth Crystal room"
+    "location": "Tower of Zot",
+    "check": "Complete the tower"
   },
   {
-    "id": "agart_magma_key",
+    "id": "lower_babil",
     "type": "main_quest",
-    "location": "Agart",
-    "check": "Magma Key NPC"
+    "location": "Lower Bab-il",
+    "check": "Defeat the boss"
   },
   {
-    "id": "babil_tower_key",
+    "id": "super_cannon",
     "type": "main_quest",
-    "location": "Tower of Babil",
-    "check": "Dr. Lugae reward"
+    "location": "Tower of Bab-il",
+    "check": "Destroy Super Cannon (reward on exit)"
   },
   {
-    "id": "dwarf_luca_key",
+    "id": "dwarf_castle",
     "type": "main_quest",
     "location": "Dwarf Castle",
-    "check": "Luca NPC"
+    "check": "Defeat the bosses"
   },
   {
-    "id": "dwarf_hook",
+    "id": "sealed_cave",
     "type": "main_quest",
-    "location": "Dwarf Castle",
-    "check": "Cid airship modification"
+    "location": "Sealed Cave",
+    "check": "Complete the dungeon"
   },
   {
-    "id": "sylph_spoon",
+    "id": "feymarch_rat_tail",
     "type": "main_quest",
-    "location": "Sylph Cave",
-    "check": "Treasure chest"
-  },
-  {
-    "id": "adamant_grotto",
-    "type": "main_quest",
-    "location": "Adamant Cave",
-    "check": "Adamant chest"
-  },
-  {
-    "id": "bahamut_rat_tail",
-    "type": "main_quest",
-    "location": "Bahamut Cave",
+    "location": "Town of Summons",
     "check": "Rat Tail chest"
   },
   {
-    "id": "lunar_pink_tail",
+    "id": "sylph_yang_wife",
     "type": "main_quest",
-    "location": "Lunar Subterrane",
-    "check": "Pink Puff drop"
+    "location": "Fabul",
+    "check": "Speak to Yang's wife after finding Yang"
   },
   {
-    "id": "sealed_cave_dark_crystal",
+    "id": "sylph_pan_return",
     "type": "main_quest",
-    "location": "Sealed Cave",
-    "check": "Darkness Crystal chest"
+    "location": "Fabul",
+    "check": "Return Pan to Yang's wife"
   },
   {
-    "id": "zemus_crystal",
+    "id": "adamant_trade",
     "type": "main_quest",
-    "location": "Lunar Subterrane",
-    "check": "Zemus defeat"
+    "location": "Adamant Grotto",
+    "check": "Trade the Rat Tail"
   },
   {
     "id": "feymarch_asura",
     "type": "summon_quest",
     "location": "Feymarch",
-    "check": "Asura fight"
+    "check": "Defeat Asura"
   },
   {
     "id": "feymarch_leviathan",
     "type": "summon_quest",
     "location": "Feymarch",
-    "check": "Leviathan fight"
+    "check": "Defeat Leviathan"
   },
   {
     "id": "sylph_quest",
     "type": "summon_quest",
     "location": "Sylph Cave",
-    "check": "Sylph Queen"
+    "check": "Complete Sylph quest"
   },
   {
     "id": "odin",
     "type": "summon_quest",
     "location": "Baron Castle",
-    "check": "Odin fight"
+    "check": "Defeat Odin"
   },
   {
     "id": "bahamut",
     "type": "summon_quest",
     "location": "Bahamut Cave",
-    "check": "Bahamut fight"
+    "check": "Defeat Bahamut"
   },
   {
     "id": "miab_eblan_castle",
@@ -154,7 +153,7 @@
   {
     "id": "miab_lower_babil",
     "type": "miab_chests",
-    "location": "Lower Babil",
+    "location": "Lower Bab-il",
     "miab_chest_count": 4
   },
   {
