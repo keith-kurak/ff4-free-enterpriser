@@ -15,9 +15,9 @@ import { CheckboxRow } from "@/components/CheckboxRow";
 import { useTheme } from "@/hooks/useTheme";
 import { Spacing } from "@/constants/theme";
 import { CurrentRunStackParamList } from "@/navigation/CurrentRunStackNavigator";
-import { ActiveRun, Shop, KeyItem } from "@/types";
+import { ActiveRun, Shop, FEKeyItemLocation } from "@/types";
 import { getActiveRun, saveActiveRun } from "@/lib/storage";
-import { getShopsByLocation, getKeyItemsByType, getShops, getKeyItems } from "@/lib/data";
+import { getShopsByLocation, getShops, getFEKeyItemLocationsByLocation, getFEKeyItemLocations } from "@/lib/data";
 
 type NavigationProp = NativeStackNavigationProp<CurrentRunStackParamList>;
 
@@ -126,8 +126,8 @@ export default function CurrentRunScreen() {
 
   const shopsByLocation = getShopsByLocation();
   const allShops = getShops();
-  const allKeyItems = getKeyItems();
-  const { mainQuest, summonQuest, miabChests } = getKeyItemsByType(activeRun.flags);
+  const allKeyItemLocations = getFEKeyItemLocations();
+  const keyItemLocationsByLocation = getFEKeyItemLocationsByLocation(activeRun.flags);
 
   const getShopVisit = (shopId: string) => {
     return activeRun.shopVisits.find((sv) => sv.shopId === shopId);
@@ -141,11 +141,12 @@ export default function CurrentRunScreen() {
     return allShops.find((s) => s.id === shopId);
   };
 
-  const getKeyItemById = (keyItemId: string): KeyItem | undefined => {
-    return allKeyItems.find((ki) => ki.id === keyItemId);
+  const getKeyItemLocationById = (keyItemId: string): FEKeyItemLocation | undefined => {
+    return allKeyItemLocations.find((ki) => ki.id === keyItemId);
   };
 
-  const locations = Array.from(shopsByLocation.keys()).sort();
+  const shopLocations = Array.from(shopsByLocation.keys()).sort();
+  const keyItemLocations = Array.from(keyItemLocationsByLocation.keys()).sort();
 
   return (
     <ScrollView
@@ -183,7 +184,7 @@ export default function CurrentRunScreen() {
       </View>
 
       <CollapsibleSection title="Shops" defaultExpanded>
-        {locations.map((location) => {
+        {shopLocations.map((location) => {
           const shops = shopsByLocation.get(location) || [];
           return (
             <View key={location} style={styles.locationGroup}>
@@ -212,72 +213,34 @@ export default function CurrentRunScreen() {
         })}
       </CollapsibleSection>
 
-      <CollapsibleSection title="Key Items" defaultExpanded>
-        {mainQuest.length > 0 && (
-          <View style={styles.keyItemGroup}>
-            <ThemedText
-              type="small"
-              style={[styles.locationHeader, { color: theme.textSecondary }]}
-            >
-              Main Quest
-            </ThemedText>
-            {mainQuest.map((item) => {
-              const check = getKeyItemCheck(item.id);
-              return (
-                <CheckboxRow
-                  key={item.id}
-                  label={`${item.location}: ${item.check}`}
-                  checked={check?.checked || false}
-                  onToggle={() => handleKeyItemToggle(item.id)}
-                />
-              );
-            })}
-          </View>
-        )}
-
-        {summonQuest.length > 0 && (
-          <View style={styles.keyItemGroup}>
-            <ThemedText
-              type="small"
-              style={[styles.locationHeader, { color: theme.textSecondary }]}
-            >
-              Summon Quests
-            </ThemedText>
-            {summonQuest.map((item) => {
-              const check = getKeyItemCheck(item.id);
-              return (
-                <CheckboxRow
-                  key={item.id}
-                  label={`${item.location}: ${item.check}`}
-                  checked={check?.checked || false}
-                  onToggle={() => handleKeyItemToggle(item.id)}
-                />
-              );
-            })}
-          </View>
-        )}
-
-        {miabChests.length > 0 && (
-          <View style={styles.keyItemGroup}>
-            <ThemedText
-              type="small"
-              style={[styles.locationHeader, { color: theme.textSecondary }]}
-            >
-              Monster-in-a-Box Chests
-            </ThemedText>
-            {miabChests.map((item) => {
-              const check = getKeyItemCheck(item.id);
-              return (
-                <CheckboxRow
-                  key={item.id}
-                  label={`${item.location} (${item.miab_chest_count} chests)`}
-                  checked={check?.checked || false}
-                  onToggle={() => handleKeyItemToggle(item.id)}
-                />
-              );
-            })}
-          </View>
-        )}
+      <CollapsibleSection title="Key Item Locations" defaultExpanded>
+        {keyItemLocations.map((location) => {
+          const items = keyItemLocationsByLocation.get(location) || [];
+          return (
+            <View key={location} style={styles.locationGroup}>
+              <ThemedText
+                type="small"
+                style={[styles.locationHeader, { color: theme.textSecondary }]}
+              >
+                {location}
+              </ThemedText>
+              {items.map((item) => {
+                const check = getKeyItemCheck(item.id);
+                const label = item.miab_chest_count
+                  ? `${item.check} (${item.miab_chest_count} chests)`
+                  : item.check;
+                return (
+                  <CheckboxRow
+                    key={item.id}
+                    label={label}
+                    checked={check?.checked || false}
+                    onToggle={() => handleKeyItemToggle(item.id)}
+                  />
+                );
+              })}
+            </View>
+          );
+        })}
       </CollapsibleSection>
     </ScrollView>
   );
@@ -341,8 +304,5 @@ const styles = StyleSheet.create({
   locationHeader: {
     marginBottom: Spacing.xs,
     fontWeight: "600",
-  },
-  keyItemGroup: {
-    marginBottom: Spacing.md,
   },
 });

@@ -25,6 +25,53 @@ export function getFEKeyItemLocations(): FEKeyItemLocation[] {
   return feKeyItemLocationsData as FEKeyItemLocation[];
 }
 
+export function getFilteredFEKeyItemLocations(flags: RunFlags): FEKeyItemLocation[] {
+  const locations = getFEKeyItemLocations();
+  
+  return locations.filter((item) => {
+    if (item.type === 'main_quest') {
+      if (item.conditions?.free_item_enabled === true && !flags.freeItemToroia) {
+        return false;
+      }
+      if (item.conditions?.free_item_enabled === false && flags.freeItemToroia) {
+        return false;
+      }
+      return true;
+    }
+    
+    if (item.type === 'summon_quest') {
+      return flags.summonQuestRewards;
+    }
+    
+    if (item.type === 'miab_chests') {
+      return flags.monsterInABox;
+    }
+    
+    return true;
+  });
+}
+
+export function getFEKeyItemLocationsByLocation(flags: RunFlags): Map<string, FEKeyItemLocation[]> {
+  const locations = getFilteredFEKeyItemLocations(flags);
+  const grouped = new Map<string, FEKeyItemLocation[]>();
+  
+  locations.forEach((location) => {
+    const existing = grouped.get(location.location) || [];
+    existing.push(location);
+    grouped.set(location.location, existing);
+  });
+  
+  return grouped;
+}
+
+export function initializeFEKeyItemLocationChecks(flags: RunFlags): KeyItemCheck[] {
+  const items = getFilteredFEKeyItemLocations(flags);
+  return items.map((item) => ({
+    keyItemId: item.id,
+    checked: false,
+  }));
+}
+
 export function getShopsByLocation(): Map<string, Shop[]> {
   const shops = getShops();
   const grouped = new Map<string, Shop[]>();
@@ -88,7 +135,7 @@ export function initializeShopVisits(): ShopVisit[] {
 }
 
 export function initializeKeyItemChecks(flags: RunFlags): KeyItemCheck[] {
-  const items = getFilteredKeyItems(flags);
+  const items = getFilteredFEKeyItemLocations(flags);
   return items.map((item) => ({
     keyItemId: item.id,
     checked: false,
