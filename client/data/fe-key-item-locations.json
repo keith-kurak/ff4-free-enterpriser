@@ -3,169 +3,197 @@
     "id": "baron_start",
     "type": "main_quest",
     "location": "Baron Castle",
-    "check": "Opening cutscene starting item"
+    "check": "Opening cutscene starting item",
+    "sequence": 1
   },
   {
     "id": "antlion_nest",
     "type": "main_quest",
     "location": "Antlion's Nest",
-    "check": "Complete the dungeon"
+    "check": "Complete the dungeon",
+    "sequence": 2
   },
   {
     "id": "fabul_defense",
     "type": "main_quest",
     "location": "Fabul",
-    "check": "Defend Fabul"
+    "check": "Defend Fabul",
+    "sequence": 3
   },
   {
     "id": "ordeals_mirror",
     "type": "main_quest",
     "location": "Mt. Ordeals",
-    "check": "Enter the mirror room"
+    "check": "Enter the mirror room",
+    "sequence": 4
   },
   {
     "id": "baron_inn",
     "type": "main_quest",
     "location": "Baron Inn",
-    "check": "Defeat the bosses"
+    "check": "Defeat the bosses",
+    "sequence": 5
   },
   {
     "id": "baron_liberation",
     "type": "main_quest",
     "location": "Baron Castle",
-    "check": "Liberate the castle"
+    "check": "Liberate the castle",
+    "sequence": 6
   },
   {
     "id": "toroia_edward",
     "type": "main_quest",
     "location": "Toroia Castle",
     "check": "Speak to Edward",
-    "conditions": { "free_item_enabled": true }
+    "conditions": { "free_item_enabled": true },
+    "sequence": 7
   },
   {
     "id": "cave_magnes",
     "type": "main_quest",
     "location": "Cave Magnes",
-    "check": "Complete the dungeon"
+    "check": "Complete the dungeon",
+    "sequence": 8
   },
   {
     "id": "tower_zot",
     "type": "main_quest",
     "location": "Tower of Zot",
-    "check": "Complete the tower"
+    "check": "Complete the tower",
+    "sequence": 9
   },
   {
     "id": "lower_babil",
     "type": "main_quest",
     "location": "Lower Bab-il",
-    "check": "Defeat the boss"
+    "check": "Defeat the boss",
+    "sequence": 10
   },
   {
     "id": "super_cannon",
     "type": "main_quest",
     "location": "Tower of Bab-il",
-    "check": "Destroy Super Cannon (reward on exit)"
+    "check": "Destroy Super Cannon (reward on exit)",
+    "sequence": 11
   },
   {
     "id": "dwarf_castle",
     "type": "main_quest",
     "location": "Dwarf Castle",
-    "check": "Defeat the bosses"
+    "check": "Defeat the bosses",
+    "sequence": 12
   },
   {
     "id": "sealed_cave",
     "type": "main_quest",
     "location": "Sealed Cave",
-    "check": "Complete the dungeon"
+    "check": "Complete the dungeon",
+    "sequence": 13
   },
   {
     "id": "feymarch_rat_tail",
     "type": "main_quest",
     "location": "Town of Summons",
-    "check": "Rat Tail chest"
+    "check": "Rat Tail chest",
+    "sequence": 14
   },
   {
     "id": "sylph_yang_wife",
     "type": "main_quest",
     "location": "Fabul",
-    "check": "Speak to Yang's wife after finding Yang"
+    "check": "Speak to Yang's wife after finding Yang",
+    "sequence": 15
   },
   {
     "id": "sylph_pan_return",
     "type": "main_quest",
     "location": "Fabul",
-    "check": "Return Pan to Yang's wife"
+    "check": "Return Pan to Yang's wife",
+    "sequence": 16
   },
   {
     "id": "adamant_trade",
     "type": "main_quest",
     "location": "Adamant Grotto",
-    "check": "Trade the Rat Tail"
+    "check": "Trade the Rat Tail",
+    "sequence": 17
   },
   {
     "id": "feymarch_asura",
     "type": "summon_quest",
     "location": "Feymarch",
-    "check": "Defeat Asura"
+    "check": "Defeat Asura",
+    "sequence": 100
   },
   {
     "id": "feymarch_leviathan",
     "type": "summon_quest",
     "location": "Feymarch",
-    "check": "Defeat Leviathan"
+    "check": "Defeat Leviathan",
+    "sequence": 101
   },
   {
     "id": "sylph_quest",
     "type": "summon_quest",
     "location": "Sylph Cave",
-    "check": "Complete Sylph quest"
+    "check": "Complete Sylph quest",
+    "sequence": 102
   },
   {
     "id": "odin",
     "type": "summon_quest",
     "location": "Baron Castle",
-    "check": "Defeat Odin"
+    "check": "Defeat Odin",
+    "sequence": 103
   },
   {
     "id": "bahamut",
     "type": "summon_quest",
     "location": "Bahamut Cave",
-    "check": "Defeat Bahamut"
+    "check": "Defeat Bahamut",
+    "sequence": 104
   },
   {
     "id": "miab_eblan_castle",
     "type": "miab_chests",
     "location": "Eblan Castle",
-    "miab_chest_count": 3
+    "miab_chest_count": 3,
+    "sequence": 200
   },
   {
     "id": "miab_toroia_castle",
     "type": "miab_chests",
     "location": "Toroia Castle",
-    "miab_chest_count": 9
+    "miab_chest_count": 9,
+    "sequence": 201
   },
   {
     "id": "miab_tower_of_zot",
     "type": "miab_chests",
     "location": "Tower of Zot",
-    "miab_chest_count": 1
+    "miab_chest_count": 1,
+    "sequence": 202
   },
   {
     "id": "miab_lower_babil",
     "type": "miab_chests",
     "location": "Lower Bab-il",
-    "miab_chest_count": 4
+    "miab_chest_count": 4,
+    "sequence": 203
   },
   {
     "id": "miab_sylph_cave",
     "type": "miab_chests",
     "location": "Sylph Cave",
-    "miab_chest_count": 7
+    "miab_chest_count": 7,
+    "sequence": 204
   },
   {
     "id": "miab_lunar_sub",
     "type": "miab_chests",
     "location": "Lunar Subterrane",
-    "miab_chest_count": 8
+    "miab_chest_count": 8,
+    "sequence": 205
   }
 ]

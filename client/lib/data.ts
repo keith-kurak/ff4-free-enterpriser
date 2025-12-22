@@ -53,9 +53,10 @@ export function getFilteredFEKeyItemLocations(flags: RunFlags): FEKeyItemLocatio
 
 export function getFEKeyItemLocationsByLocation(flags: RunFlags): Map<string, FEKeyItemLocation[]> {
   const locations = getFilteredFEKeyItemLocations(flags);
+  const sorted = [...locations].sort((a, b) => a.sequence - b.sequence);
   const grouped = new Map<string, FEKeyItemLocation[]>();
   
-  locations.forEach((location) => {
+  sorted.forEach((location) => {
     const existing = grouped.get(location.location) || [];
     existing.push(location);
     grouped.set(location.location, existing);
@@ -74,9 +75,10 @@ export function initializeFEKeyItemLocationChecks(flags: RunFlags): KeyItemCheck
 
 export function getShopsByLocation(): Map<string, Shop[]> {
   const shops = getShops();
+  const sorted = [...shops].sort((a, b) => a.sequence - b.sequence);
   const grouped = new Map<string, Shop[]>();
   
-  shops.forEach((shop) => {
+  sorted.forEach((shop) => {
     const existing = grouped.get(shop.location) || [];
     existing.push(shop);
     grouped.set(shop.location, existing);

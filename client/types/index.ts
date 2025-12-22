@@ -3,6 +3,7 @@ export interface Shop {
   type: 'weapon' | 'armor' | 'item' | 'weapon_armor';
   location: string;
   name: string;
+  sequence: number;
 }
 
 export interface KeyItem {
@@ -45,6 +46,7 @@ export interface FEKeyItemLocation {
   conditions?: {
     free_item_enabled?: boolean;
   };
+  sequence: number;
 }
 
 export interface RunFlags {

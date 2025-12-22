@@ -50,8 +50,8 @@ export default function FEKeyItemLocationsScreen() {
           {item.check}
         </ThemedText>
         {item.conditions?.free_item_enabled !== undefined ? (
-          <View style={[styles.conditionBadge, { backgroundColor: theme.info + "1A" }]}>
-            <ThemedText type="small" style={{ color: theme.info }}>
+          <View style={[styles.conditionBadge, { backgroundColor: theme.secondary + "1A" }]}>
+            <ThemedText type="small" style={{ color: theme.secondary }}>
               {item.conditions.free_item_enabled ? "Free Item: Toroia" : "Free Item: Mist"}
             </ThemedText>
           </View>
