@@ -80,6 +80,7 @@
     "type": "main_quest",
     "location": "Tower of Bab-il",
     "check": "Destroy Super Cannon (reward on exit)",
+    "location_lock": "underworld",
     "sequence": 11
   },
   {
@@ -170,25 +171,34 @@
     "sequence": 104
   },
   {
-    "id": "miab_eblan_castle",
+    "id": "miab_tower_of_zot",
     "type": "miab_chests",
-    "location": "Eblan Castle",
+    "location": "Tower of Zot",
     "miab_chest_count": 3,
     "sequence": 200
   },
   {
-    "id": "miab_toroia_castle",
+    "id": "miab_eblan_castle",
     "type": "miab_chests",
-    "location": "Toroia Castle",
-    "miab_chest_count": 9,
+    "location": "Eblan Castle",
+    "miab_chest_count": 3,
     "sequence": 201
   },
   {
-    "id": "miab_tower_of_zot",
+    "id": "miab_eblan_cave",
     "type": "miab_chests",
-    "location": "Tower of Zot",
+    "location": "Eblan Cave",
     "miab_chest_count": 1,
+    "locked_by": "hook",
     "sequence": 202
+  },
+  {
+    "id": "miab_upper_babil",
+    "type": "miab_chests",
+    "location": "Upper Bab-il",
+    "miab_chest_count": 1,
+    "locked_by": "hook",
+    "sequence": 203
   },
   {
     "id": "miab_lower_babil",
@@ -196,7 +206,15 @@
     "location": "Lower Bab-il",
     "miab_chest_count": 4,
     "location_lock": "underworld",
-    "sequence": 203
+    "sequence": 204
+  },
+  {
+    "id": "miab_summoned_cave",
+    "type": "miab_chests",
+    "location": "Cave of Summoned Monsters",
+    "miab_chest_count": 1,
+    "location_lock": "underworld",
+    "sequence": 205
   },
   {
     "id": "miab_sylph_cave",
@@ -204,14 +222,30 @@
     "location": "Sylph Cave",
     "miab_chest_count": 7,
     "location_lock": "underworld",
-    "sequence": 204
+    "sequence": 206
+  },
+  {
+    "id": "miab_giant_babil",
+    "type": "miab_chests",
+    "location": "Giant of Bab-il",
+    "miab_chest_count": 1,
+    "locked_by": "darkness_crystal",
+    "sequence": 207
+  },
+  {
+    "id": "miab_lunar_path",
+    "type": "miab_chests",
+    "location": "Lunar Path",
+    "miab_chest_count": 1,
+    "location_lock": "moon",
+    "sequence": 208
   },
   {
     "id": "miab_lunar_sub",
     "type": "miab_chests",
     "location": "Lunar Subterrane",
-    "miab_chest_count": 8,
+    "miab_chest_count": 9,
     "location_lock": "moon",
-    "sequence": 205
+    "sequence": 209
   }
 ]
