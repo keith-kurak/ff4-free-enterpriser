@@ -56,15 +56,13 @@ export default function FEKeyItemLocationsScreen() {
         <ThemedText type="small" style={{ color: theme.textSecondary }}>
           {item.check}
         </ThemedText>
-        {(item.miab_chest_count || item.locked_by || item.location_lock) ? (
+        {item.miab_chest_count ? (
+          <ThemedText type="small" style={{ color: theme.textSecondary }}>
+            {item.miab_chest_count} chest{item.miab_chest_count > 1 ? "s" : ""}
+          </ThemedText>
+        ) : null}
+        {(item.locked_by || item.location_lock) ? (
           <View style={styles.tagsRow}>
-            {item.miab_chest_count ? (
-              <View style={[styles.tag, { backgroundColor: theme.warning + "1A" }]}>
-                <ThemedText type="small" style={{ color: theme.warning }}>
-                  {item.miab_chest_count} chest{item.miab_chest_count > 1 ? "s" : ""}
-                </ThemedText>
-              </View>
-            ) : null}
             {item.locked_by ? (
               <View style={[styles.tag, { backgroundColor: theme.primary + "1A" }]}>
                 <Feather name="key" size={10} color={theme.primary} />
