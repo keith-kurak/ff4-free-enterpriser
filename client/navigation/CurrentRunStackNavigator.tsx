@@ -24,7 +24,7 @@ export default function CurrentRunStackNavigator() {
         name="CurrentRun"
         component={CurrentRunScreen}
         options={{
-          headerTitle: () => <HeaderTitle title="FE Tracker" />,
+          headerTitle: () => <HeaderTitle title="Free Enterpriser" />,
         }}
       />
       <Stack.Screen

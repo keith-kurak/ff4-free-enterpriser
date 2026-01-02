@@ -10,6 +10,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "@/lib/query-client";
 
 import RootStackNavigator from "@/navigation/RootStackNavigator";
+import { linking } from "@/navigation/linking";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 export default function App() {
@@ -19,7 +20,7 @@ export default function App() {
         <SafeAreaProvider>
           <GestureHandlerRootView style={styles.root}>
             <KeyboardProvider>
-              <NavigationContainer>
+              <NavigationContainer linking={linking}>
                 <RootStackNavigator />
               </NavigationContainer>
               <StatusBar style="auto" />
