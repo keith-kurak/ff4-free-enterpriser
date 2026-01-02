@@ -56,27 +56,31 @@ export default function FEKeyItemLocationsScreen() {
         <ThemedText type="small" style={{ color: theme.textSecondary }}>
           {item.check}
         </ThemedText>
-        {item.miab_chest_count ? (
-          <View style={[styles.countBadge, { backgroundColor: theme.warning + "1A" }]}>
-            <ThemedText type="small" style={{ color: theme.warning }}>
-              {item.miab_chest_count} chest{item.miab_chest_count > 1 ? "s" : ""}
-            </ThemedText>
-          </View>
-        ) : null}
-        {item.locked_by ? (
-          <View style={styles.infoRow}>
-            <Feather name="key" size={12} color={theme.textSecondary} />
-            <ThemedText type="small" style={{ color: theme.textSecondary }}>
-              {formatLockName(item.locked_by)}
-            </ThemedText>
-          </View>
-        ) : null}
-        {item.location_lock ? (
-          <View style={styles.infoRow}>
-            <Feather name="map-pin" size={12} color={theme.textSecondary} />
-            <ThemedText type="small" style={{ color: theme.textSecondary }}>
-              {formatLockName(item.location_lock)}
-            </ThemedText>
+        {(item.miab_chest_count || item.locked_by || item.location_lock) ? (
+          <View style={styles.tagsRow}>
+            {item.miab_chest_count ? (
+              <View style={[styles.tag, { backgroundColor: theme.warning + "1A" }]}>
+                <ThemedText type="small" style={{ color: theme.warning }}>
+                  {item.miab_chest_count} chest{item.miab_chest_count > 1 ? "s" : ""}
+                </ThemedText>
+              </View>
+            ) : null}
+            {item.locked_by ? (
+              <View style={[styles.tag, { backgroundColor: theme.primary + "1A" }]}>
+                <Feather name="key" size={10} color={theme.primary} />
+                <ThemedText type="small" style={{ color: theme.primary }}>
+                  {formatLockName(item.locked_by)}
+                </ThemedText>
+              </View>
+            ) : null}
+            {item.location_lock ? (
+              <View style={[styles.tag, { backgroundColor: theme.secondary + "1A" }]}>
+                <Feather name="map-pin" size={10} color={theme.secondary} />
+                <ThemedText type="small" style={{ color: theme.secondary }}>
+                  {formatLockName(item.location_lock)}
+                </ThemedText>
+              </View>
+            ) : null}
           </View>
         ) : null}
         {item.notes ? (
@@ -167,18 +171,19 @@ const styles = StyleSheet.create({
     borderRadius: BorderRadius.full,
     marginTop: Spacing.xs,
   },
-  countBadge: {
-    alignSelf: "flex-start",
+  tagsRow: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: Spacing.xs,
+    marginTop: Spacing.sm,
+  },
+  tag: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
     paddingHorizontal: Spacing.sm,
     paddingVertical: Spacing.xs,
     borderRadius: BorderRadius.full,
-    marginTop: Spacing.xs,
-  },
-  infoRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: Spacing.xs,
-    marginTop: Spacing.xs,
   },
   notesContainer: {
     marginTop: Spacing.sm,
