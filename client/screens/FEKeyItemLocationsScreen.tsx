@@ -40,6 +40,13 @@ export default function FEKeyItemLocationsScreen() {
     { title: "Monster-in-a-Box", data: miabChests, type: "miab_chests" },
   ].filter((s) => s.data.length > 0);
 
+  const formatLockName = (lockId: string) => {
+    return lockId
+      .split("_")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+
   const renderItem = ({ item }: { item: FEKeyItemLocation }) => (
     <View style={[styles.item, { borderBottomColor: theme.border }]}>
       <View style={styles.itemContent}>
@@ -49,17 +56,33 @@ export default function FEKeyItemLocationsScreen() {
         <ThemedText type="small" style={{ color: theme.textSecondary }}>
           {item.check}
         </ThemedText>
-        {item.conditions?.free_item_enabled !== undefined ? (
-          <View style={[styles.conditionBadge, { backgroundColor: theme.secondary + "1A" }]}>
-            <ThemedText type="small" style={{ color: theme.secondary }}>
-              {item.conditions.free_item_enabled ? "Free Item: Toroia" : "Free Item: Mist"}
-            </ThemedText>
-          </View>
-        ) : null}
         {item.miab_chest_count ? (
           <View style={[styles.countBadge, { backgroundColor: theme.warning + "1A" }]}>
             <ThemedText type="small" style={{ color: theme.warning }}>
               {item.miab_chest_count} chest{item.miab_chest_count > 1 ? "s" : ""}
+            </ThemedText>
+          </View>
+        ) : null}
+        {item.locked_by ? (
+          <View style={styles.infoRow}>
+            <Feather name="key" size={12} color={theme.textSecondary} />
+            <ThemedText type="small" style={{ color: theme.textSecondary }}>
+              {formatLockName(item.locked_by)}
+            </ThemedText>
+          </View>
+        ) : null}
+        {item.location_lock ? (
+          <View style={styles.infoRow}>
+            <Feather name="map-pin" size={12} color={theme.textSecondary} />
+            <ThemedText type="small" style={{ color: theme.textSecondary }}>
+              {formatLockName(item.location_lock)}
+            </ThemedText>
+          </View>
+        ) : null}
+        {item.notes ? (
+          <View style={[styles.notesContainer, { backgroundColor: theme.backgroundDefault }]}>
+            <ThemedText type="small" style={{ color: theme.textSecondary, fontStyle: "italic" }}>
+              {item.notes}
             </ThemedText>
           </View>
         ) : null}
@@ -150,5 +173,16 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.xs,
     borderRadius: BorderRadius.full,
     marginTop: Spacing.xs,
+  },
+  infoRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: Spacing.xs,
+    marginTop: Spacing.xs,
+  },
+  notesContainer: {
+    marginTop: Spacing.sm,
+    padding: Spacing.sm,
+    borderRadius: BorderRadius.xs,
   },
 });

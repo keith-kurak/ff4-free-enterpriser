@@ -2,81 +2,86 @@
   {
     "id": "package",
     "name": "Package",
-    "used_for": "Triggering the Mist Cave mission and Mist Dragon"
+    "used_for": "Burns down Mist Village"
   },
   {
     "id": "sand_ruby",
     "name": "Sand Ruby",
-    "used_for": "Curing Rosa in Kaipo"
+    "used_for": "Cures the sick person in Kaipo"
   },
   {
     "id": "legend_sword",
     "name": "Legend Sword",
-    "used_for": "Cecil's Paladin trial at Mt. Ordeals"
+    "used_for": "Used with Adamant to forge the Excalibur"
   },
   {
     "id": "baron_key",
     "name": "Baron Key",
-    "used_for": "Opening sealed areas of Baron Castle"
+    "used_for": "Opens sealed areas of Baron Castle and Town"
   },
   {
     "id": "twin_harp",
     "name": "Twin Harp",
-    "used_for": "Disabling the Dark Elf's magnetic field"
+    "used_for": "Disables the Dark Elf's magnetic field"
   },
   {
     "id": "earth_crystal",
     "name": "Earth Crystal",
-    "used_for": "Story progression and Golbez's crystal plot"
+    "used_for": "Allows completion of the Tower of Zot"
   },
   {
     "id": "magma_key",
     "name": "Magma Key",
-    "used_for": "Opening the path to the Underworld"
+    "used_for": "Opens the path to the Underworld in Agart"
   },
   {
     "id": "tower_key",
     "name": "Tower Key",
-    "used_for": "Opening sealed doors in the Tower of Babil"
+    "used_for": "Opens the sealed door in the Tower of Bab-il"
+  },
+  {
+    "id": "pan",
+    "name": "Pan",
+    "used_for": "Wake up Yang in the Sylph Cave; trade back to Sheila for another item"
   },
   {
     "id": "luca_key",
     "name": "Luca Key",
-    "used_for": "Activating the Super Cannon"
+    "used_for": "Opens the Sealed Cave in the Underworld"
   },
   {
     "id": "hook",
     "name": "Hook",
-    "used_for": "Upgrading the airship to travel between worlds"
+    "used_for": "Allows the airship to pick up the hovercraft"
   },
   {
     "id": "spoon",
     "name": "Spoon",
-    "used_for": "Powerful throwing weapon; FE progression item; Edward can often equip this"
+    "used_for": "Powerful throwing weapon; Edward can often equip this in FE"
   },
   {
     "id": "adamant",
     "name": "Adamant",
-    "used_for": "Forging the Excalibur"
+    "used_for": "Used with the Legend Sword to forge the Excalibur"
   },
   {
     "id": "rat_tail",
     "name": "Rat Tail",
-    "used_for": "Trading with the Adamant Gnome"
+    "used_for": "Trade for the Adamant Armor"
   },
   {
     "id": "pink_tail",
     "name": "Pink Tail",
-    "used_for": "Trading for the Adamant Armor"
+    "used_for": "Trade with the Adamant gnome"
   },
   {
     "id": "darkness_crystal",
     "name": "Darkness Crystal",
-    "used_for": "Golbez's final crystal objective"
+    "used_for": "Powers the Big Whale airship, allowing travel to the Moon"
   },
   {
     "id": "crystal",
     "name": "Crystal",
-    "used_for": "Revealing and defeating Zeromus"
+    "used_for": "Reveal Zeromus's true form"
   }
 ]

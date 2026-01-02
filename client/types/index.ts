@@ -47,6 +47,9 @@ export interface FEKeyItemLocation {
     free_item_enabled?: boolean;
   };
   sequence: number;
+  locked_by?: string;
+  location_lock?: string;
+  notes?: string;
 }
 
 export interface RunFlags {

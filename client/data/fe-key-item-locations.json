@@ -39,14 +39,15 @@
     "type": "main_quest",
     "location": "Baron Castle",
     "check": "Liberate the castle",
-    "sequence": 6
+    "sequence": 6,
+    "locked_by": "baron_key"
   },
   {
     "id": "toroia_edward",
     "type": "main_quest",
     "location": "Toroia Castle",
     "check": "Speak to Edward",
-    "conditions": { "free_item_enabled": true },
+    "notes": "If free item behavior is disabled, item is given by Rydia's mom in Mist Village after defeating Mist Dragon.",
     "sequence": 7
   },
   {
@@ -54,20 +55,24 @@
     "type": "main_quest",
     "location": "Cave Magnes",
     "check": "Complete the dungeon",
-    "sequence": 8
+    "sequence": 8,
+    "locked_by": "twin_harp"
   },
   {
     "id": "tower_zot",
     "type": "main_quest",
     "location": "Tower of Zot",
     "check": "Complete the tower",
-    "sequence": 9
+    "sequence": 9,
+    "locked_by": "earth_crystal"
   },
   {
     "id": "lower_babil",
     "type": "main_quest",
     "location": "Lower Bab-il",
     "check": "Defeat the boss",
+    "locked_by": "tower_key",
+    "location_lock": "underworld",
     "sequence": 10
   },
   {
@@ -82,6 +87,7 @@
     "type": "main_quest",
     "location": "Dwarf Castle",
     "check": "Defeat the bosses",
+    "location_lock": "underworld",
     "sequence": 12
   },
   {
@@ -89,27 +95,31 @@
     "type": "main_quest",
     "location": "Sealed Cave",
     "check": "Complete the dungeon",
+    "location_lock": "underworld",
     "sequence": 13
   },
   {
     "id": "feymarch_rat_tail",
     "type": "main_quest",
     "location": "Town of Summons",
-    "check": "Rat Tail chest",
+    "check": "Land of Summoned Monsters chest",
+    "location_lock": "underworld",
     "sequence": 14
   },
   {
     "id": "sylph_yang_wife",
     "type": "main_quest",
     "location": "Fabul",
-    "check": "Speak to Yang's wife after finding Yang",
+    "check": "Speak to Sheila after finding Yang",
+    "location_lock": "underworld",
     "sequence": 15
   },
   {
     "id": "sylph_pan_return",
     "type": "main_quest",
     "location": "Fabul",
-    "check": "Return Pan to Yang's wife",
+    "check": "Return Pan to Sheila",
+    "location_lock": "underworld",
     "sequence": 16
   },
   {
@@ -124,6 +134,7 @@
     "type": "summon_quest",
     "location": "Feymarch",
     "check": "Defeat Asura",
+    "location_lock": "underworld",
     "sequence": 100
   },
   {
@@ -131,6 +142,7 @@
     "type": "summon_quest",
     "location": "Feymarch",
     "check": "Defeat Leviathan",
+    "location_lock": "underworld",
     "sequence": 101
   },
   {
@@ -138,12 +150,14 @@
     "type": "summon_quest",
     "location": "Sylph Cave",
     "check": "Complete Sylph quest",
+    "location_lock": "underworld",
     "sequence": 102
   },
   {
     "id": "odin",
     "type": "summon_quest",
     "location": "Baron Castle",
+    "locked_by": "baron_key",
     "check": "Defeat Odin",
     "sequence": 103
   },
@@ -152,6 +166,7 @@
     "type": "summon_quest",
     "location": "Bahamut Cave",
     "check": "Defeat Bahamut",
+    "location_lock": "moon",
     "sequence": 104
   },
   {
@@ -180,6 +195,7 @@
     "type": "miab_chests",
     "location": "Lower Bab-il",
     "miab_chest_count": 4,
+    "location_lock": "underworld",
     "sequence": 203
   },
   {
@@ -187,6 +203,7 @@
     "type": "miab_chests",
     "location": "Sylph Cave",
     "miab_chest_count": 7,
+    "location_lock": "underworld",
     "sequence": 204
   },
   {
@@ -194,6 +211,7 @@
     "type": "miab_chests",
     "location": "Lunar Subterrane",
     "miab_chest_count": 8,
+    "location_lock": "moon",
     "sequence": 205
   }
 ]
