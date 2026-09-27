@@ -1,7 +1,7 @@
 import React from "react";
 import { View, SectionList, StyleSheet } from "react-native";
-import { useHeaderHeight } from "@react-navigation/elements";
-import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import { useHeaderHeight } from "expo-router/react-navigation";
+import { useBottomTabBarHeight } from "expo-router/js-tabs";
 import { Feather } from "@expo/vector-icons";
 
 import { ThemedText } from "@/components/ThemedText";

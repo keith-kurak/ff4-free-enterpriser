@@ -1,8 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { View, StyleSheet, TextInput, Switch, Alert, Pressable } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useHeaderHeight } from "@react-navigation/elements";
+import { useNavigation } from "expo-router";
+import { useHeaderHeight } from "expo-router/react-navigation";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as Haptics from "expo-haptics";
 
@@ -10,16 +9,14 @@ import { ThemedText } from "@/components/ThemedText";
 import { KeyboardAwareScrollViewCompat } from "@/components/KeyboardAwareScrollViewCompat";
 import { useTheme } from "@/hooks/useTheme";
 import { Spacing, BorderRadius } from "@/constants/theme";
-import { CurrentRunStackParamList } from "@/navigation/CurrentRunStackNavigator";
 import { RunFlags } from "@/types";
 import { saveActiveRun } from "@/lib/storage";
 import { initializeShopVisits, initializeKeyItemChecks, generateRunId } from "@/lib/data";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-type NavigationProp = NativeStackNavigationProp<CurrentRunStackParamList>;
 
 export default function NewRunScreen() {
-  const navigation = useNavigation<NavigationProp>();
+  const navigation = useNavigation();
   const headerHeight = useHeaderHeight();
   const insets = useSafeAreaInsets();
   const { theme } = useTheme();

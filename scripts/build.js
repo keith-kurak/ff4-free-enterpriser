@@ -187,7 +187,7 @@ async function downloadFile(url, outputPath) {
 }
 
 async function downloadBundle(platform, timestamp) {
-  const url = new URL("http://localhost:8081/client/index.bundle");
+  const url = new URL("http://localhost:8081/node_modules/expo-router/entry.bundle");
   url.searchParams.set("platform", platform);
   url.searchParams.set("dev", "false");
   url.searchParams.set("hot", "false");

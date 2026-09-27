@@ -1,9 +1,8 @@
 import React, { useState, useCallback } from "react";
 import { View, ScrollView, StyleSheet, RefreshControl, Alert } from "react-native";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useHeaderHeight } from "@react-navigation/elements";
-import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import { useFocusEffect, useRouter } from "expo-router";
+import { useHeaderHeight } from "expo-router/react-navigation";
+import { useBottomTabBarHeight } from "expo-router/js-tabs";
 import { Feather } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 
@@ -14,15 +13,13 @@ import { CollapsibleSection } from "@/components/CollapsibleSection";
 import { CheckboxRow } from "@/components/CheckboxRow";
 import { useTheme } from "@/hooks/useTheme";
 import { Spacing } from "@/constants/theme";
-import { CurrentRunStackParamList } from "@/navigation/CurrentRunStackNavigator";
 import { ActiveRun, Shop, FEKeyItemLocation } from "@/types";
 import { getActiveRun, saveActiveRun, clearActiveRun } from "@/lib/storage";
 import { getShopsByLocation, getShops, getFEKeyItemLocationsByLocation, getFEKeyItemLocations } from "@/lib/data";
 
-type NavigationProp = NativeStackNavigationProp<CurrentRunStackParamList>;
 
 export default function CurrentRunScreen() {
-  const navigation = useNavigation<NavigationProp>();
+  const router = useRouter();
   const headerHeight = useHeaderHeight();
   const tabBarHeight = useBottomTabBarHeight();
   const { theme } = useTheme();
@@ -101,7 +98,7 @@ export default function CurrentRunScreen() {
   };
 
   const handleCompleteRun = () => {
-    navigation.navigate("CompleteRun");
+    router.push("/current/complete");
   };
 
   const handleCancelRun = () => {
@@ -150,7 +147,7 @@ export default function CurrentRunScreen() {
             Start a new Free Enterprise run to track your progress
           </ThemedText>
           <Button
-            onPress={() => navigation.navigate("NewRun")}
+            onPress={() => router.push("/current/new")}
             style={styles.startButton}
           >
             Start New Run

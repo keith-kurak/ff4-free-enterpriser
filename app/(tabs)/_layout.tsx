@@ -1,28 +1,20 @@
 import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Tabs } from "expo-router/js-tabs";
 import { Feather } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import { Platform, StyleSheet } from "react-native";
 
-import CurrentRunStackNavigator from "@/navigation/CurrentRunStackNavigator";
-import HistoryStackNavigator from "@/navigation/HistoryStackNavigator";
-import ReferenceStackNavigator from "@/navigation/ReferenceStackNavigator";
 import { useTheme } from "@/hooks/useTheme";
 
-export type MainTabParamList = {
-  CurrentRunTab: undefined;
-  HistoryTab: undefined;
-  ReferenceTab: undefined;
+export const unstable_settings = {
+  initialRouteName: "current",
 };
 
-const Tab = createBottomTabNavigator<MainTabParamList>();
-
-export default function MainTabNavigator() {
+export default function TabLayout() {
   const { theme, isDark } = useTheme();
 
   return (
-    <Tab.Navigator
-      initialRouteName="CurrentRunTab"
+    <Tabs
       screenOptions={{
         tabBarActiveTintColor: theme.tabIconSelected,
         tabBarInactiveTintColor: theme.tabIconDefault,
@@ -46,36 +38,33 @@ export default function MainTabNavigator() {
         headerShown: false,
       }}
     >
-      <Tab.Screen
-        name="CurrentRunTab"
-        component={CurrentRunStackNavigator}
+      <Tabs.Screen
+        name="current"
         options={{
           title: "Current Run",
           tabBarIcon: ({ color, size }) => (
-            <Feather name="play-circle" size={size} color={color} />
+            <Feather name="play-circle" size={size} color={color as string} />
           ),
         }}
       />
-      <Tab.Screen
-        name="HistoryTab"
-        component={HistoryStackNavigator}
+      <Tabs.Screen
+        name="history"
         options={{
           title: "History",
           tabBarIcon: ({ color, size }) => (
-            <Feather name="clock" size={size} color={color} />
+            <Feather name="clock" size={size} color={color as string} />
           ),
         }}
       />
-      <Tab.Screen
-        name="ReferenceTab"
-        component={ReferenceStackNavigator}
+      <Tabs.Screen
+        name="reference"
         options={{
           title: "Reference",
           tabBarIcon: ({ color, size }) => (
-            <Feather name="book-open" size={size} color={color} />
+            <Feather name="book-open" size={size} color={color as string} />
           ),
         }}
       />
-    </Tab.Navigator>
+    </Tabs>
   );
 }

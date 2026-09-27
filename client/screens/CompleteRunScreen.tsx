@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { View, StyleSheet, TextInput, Pressable, Alert } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useHeaderHeight } from "@react-navigation/elements";
+import { useNavigation } from "expo-router";
+import { useHeaderHeight } from "expo-router/react-navigation";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Feather } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
@@ -11,15 +10,13 @@ import { ThemedText } from "@/components/ThemedText";
 import { KeyboardAwareScrollViewCompat } from "@/components/KeyboardAwareScrollViewCompat";
 import { useTheme } from "@/hooks/useTheme";
 import { Spacing, BorderRadius } from "@/constants/theme";
-import { CurrentRunStackParamList } from "@/navigation/CurrentRunStackNavigator";
 import { ActiveRun, CompletedRun, CHARACTERS, Character } from "@/types";
 import { getActiveRun, clearActiveRun, saveCompletedRun } from "@/lib/storage";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-type NavigationProp = NativeStackNavigationProp<CurrentRunStackParamList>;
 
 export default function CompleteRunScreen() {
-  const navigation = useNavigation<NavigationProp>();
+  const navigation = useNavigation();
   const headerHeight = useHeaderHeight();
   const insets = useSafeAreaInsets();
   const { theme } = useTheme();
