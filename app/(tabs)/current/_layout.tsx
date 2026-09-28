@@ -5,7 +5,7 @@ import { useScreenOptions } from "@/hooks/useScreenOptions";
 import { HeaderTitle } from "@/components/HeaderTitle";
 
 export const unstable_settings = {
-  initialRouteName: "index",
+  anchor: "index",
 };
 
 export default function CurrentRunLayout() {

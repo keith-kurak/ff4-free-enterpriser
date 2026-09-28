@@ -13,7 +13,7 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { useScreenOptions } from "@/hooks/useScreenOptions";
 
 export const unstable_settings = {
-  initialRouteName: "(tabs)",
+  anchor: "(tabs)",
 };
 
 function RootStack() {
@@ -23,10 +23,13 @@ function RootStack() {
     <Stack screenOptions={screenOptions}>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="about" options={{ headerTitle: "About" }} />
+      <Stack.Screen
+        name="about"
+        options={{ headerTitle: "About", headerBackTitle: "Back" }}
+      />
       <Stack.Screen
         name="privacy"
-        options={{ headerTitle: "Privacy Policy" }}
+        options={{ headerTitle: "Privacy Policy", headerBackTitle: "Back" }}
       />
     </Stack>
   );

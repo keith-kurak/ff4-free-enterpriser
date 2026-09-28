@@ -4,7 +4,7 @@ import { Stack } from "expo-router";
 import { useScreenOptions } from "@/hooks/useScreenOptions";
 
 export const unstable_settings = {
-  initialRouteName: "index",
+  anchor: "index",
 };
 
 export default function ReferenceLayout() {

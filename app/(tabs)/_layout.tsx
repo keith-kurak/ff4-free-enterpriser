@@ -7,7 +7,7 @@ import { Platform, StyleSheet } from "react-native";
 import { useTheme } from "@/hooks/useTheme";
 
 export const unstable_settings = {
-  initialRouteName: "current",
+  anchor: "current",
 };
 
 export default function TabLayout() {
