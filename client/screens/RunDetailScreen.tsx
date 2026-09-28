@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, ScrollView, StyleSheet, Alert } from "react-native";
-import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useHeaderHeight } from "@react-navigation/elements";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { useHeaderHeight } from "expo-router/react-navigation";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Feather } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
@@ -13,16 +12,13 @@ import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
 import { useTheme } from "@/hooks/useTheme";
 import { Spacing, BorderRadius } from "@/constants/theme";
-import { HistoryStackParamList } from "@/navigation/HistoryStackNavigator";
 import { CompletedRun } from "@/types";
 import { getCompletedRuns, deleteCompletedRun } from "@/lib/storage";
 
-type NavigationProp = NativeStackNavigationProp<HistoryStackParamList>;
-type RouteType = RouteProp<HistoryStackParamList, "RunDetail">;
 
 export default function RunDetailScreen() {
-  const navigation = useNavigation<NavigationProp>();
-  const route = useRoute<RouteType>();
+  const router = useRouter();
+  const { runId } = useLocalSearchParams<{ runId: string }>();
   const headerHeight = useHeaderHeight();
   const insets = useSafeAreaInsets();
   const { theme } = useTheme();
@@ -31,11 +27,11 @@ export default function RunDetailScreen() {
 
   useEffect(() => {
     loadRun();
-  }, [route.params.runId]);
+  }, [runId]);
 
   const loadRun = async () => {
     const runs = await getCompletedRuns();
-    const found = runs.find((r) => r.id === route.params.runId);
+    const found = runs.find((r) => r.id === runId);
     setRun(found || null);
   };
 
@@ -50,8 +46,8 @@ export default function RunDetailScreen() {
           style: "destructive",
           onPress: async () => {
             Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
-            await deleteCompletedRun(route.params.runId);
-            navigation.goBack();
+            await deleteCompletedRun(runId);
+            router.back();
           },
         },
       ]

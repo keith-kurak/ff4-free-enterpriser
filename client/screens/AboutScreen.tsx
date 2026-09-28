@@ -1,7 +1,7 @@
 import React from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useHeaderHeight } from "@react-navigation/elements";
+import { useHeaderHeight } from "expo-router/react-navigation";
 
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
@@ -25,8 +25,8 @@ export default function AboutScreen() {
         ]}
         scrollIndicatorInsets={{ bottom: insets.bottom }}
       >
-        <View style={[styles.section, { backgroundColor: theme.backgroundElevated }]}>
-          <ThemedText type="title" style={styles.title}>
+        <View style={[styles.section, { backgroundColor: theme.backgroundDefault }]}>
+          <ThemedText type="h3" style={styles.title}>
             Free Enterpriser
           </ThemedText>
           <ThemedText type="small" style={{ color: theme.textSecondary }}>
@@ -34,8 +34,8 @@ export default function AboutScreen() {
           </ThemedText>
         </View>
 
-        <View style={[styles.section, { backgroundColor: theme.backgroundElevated }]}>
-          <ThemedText type="subtitle" style={styles.sectionTitle}>
+        <View style={[styles.section, { backgroundColor: theme.backgroundDefault }]}>
+          <ThemedText type="h4" style={styles.sectionTitle}>
             What is this app?
           </ThemedText>
           <ThemedText style={styles.paragraph}>
@@ -45,8 +45,8 @@ export default function AboutScreen() {
           </ThemedText>
         </View>
 
-        <View style={[styles.section, { backgroundColor: theme.backgroundElevated }]}>
-          <ThemedText type="subtitle" style={styles.sectionTitle}>
+        <View style={[styles.section, { backgroundColor: theme.backgroundDefault }]}>
+          <ThemedText type="h4" style={styles.sectionTitle}>
             What is Free Enterprise?
           </ThemedText>
           <ThemedText style={styles.paragraph}>
@@ -61,8 +61,8 @@ export default function AboutScreen() {
           </ThemedText>
         </View>
 
-        <View style={[styles.section, { backgroundColor: theme.backgroundElevated }]}>
-          <ThemedText type="subtitle" style={styles.sectionTitle}>
+        <View style={[styles.section, { backgroundColor: theme.backgroundDefault }]}>
+          <ThemedText type="h4" style={styles.sectionTitle}>
             Features
           </ThemedText>
           <ThemedText style={styles.listItem}>
@@ -82,8 +82,8 @@ export default function AboutScreen() {
           </ThemedText>
         </View>
 
-        <View style={[styles.section, { backgroundColor: theme.backgroundElevated }]}>
-          <ThemedText type="subtitle" style={styles.sectionTitle}>
+        <View style={[styles.section, { backgroundColor: theme.backgroundDefault }]}>
+          <ThemedText type="h4" style={styles.sectionTitle}>
             Tips
           </ThemedText>
           <ThemedText style={styles.paragraph}>

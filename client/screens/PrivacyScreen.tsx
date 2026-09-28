@@ -1,7 +1,7 @@
 import React from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useHeaderHeight } from "@react-navigation/elements";
+import { useHeaderHeight } from "expo-router/react-navigation";
 
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
@@ -25,8 +25,8 @@ export default function PrivacyScreen() {
         ]}
         scrollIndicatorInsets={{ bottom: insets.bottom }}
       >
-        <View style={[styles.section, { backgroundColor: theme.backgroundElevated }]}>
-          <ThemedText type="title" style={styles.title}>
+        <View style={[styles.section, { backgroundColor: theme.backgroundDefault }]}>
+          <ThemedText type="h3" style={styles.title}>
             Privacy Policy
           </ThemedText>
           <ThemedText type="small" style={{ color: theme.textSecondary }}>
@@ -34,8 +34,8 @@ export default function PrivacyScreen() {
           </ThemedText>
         </View>
 
-        <View style={[styles.section, { backgroundColor: theme.backgroundElevated }]}>
-          <ThemedText type="subtitle" style={styles.sectionTitle}>
+        <View style={[styles.section, { backgroundColor: theme.backgroundDefault }]}>
+          <ThemedText type="h4" style={styles.sectionTitle}>
             Overview
           </ThemedText>
           <ThemedText style={styles.paragraph}>
@@ -44,8 +44,8 @@ export default function PrivacyScreen() {
           </ThemedText>
         </View>
 
-        <View style={[styles.section, { backgroundColor: theme.backgroundElevated }]}>
-          <ThemedText type="subtitle" style={styles.sectionTitle}>
+        <View style={[styles.section, { backgroundColor: theme.backgroundDefault }]}>
+          <ThemedText type="h4" style={styles.sectionTitle}>
             Data Collection
           </ThemedText>
           <ThemedText style={styles.paragraph}>
@@ -55,8 +55,8 @@ export default function PrivacyScreen() {
           </ThemedText>
         </View>
 
-        <View style={[styles.section, { backgroundColor: theme.backgroundElevated }]}>
-          <ThemedText type="subtitle" style={styles.sectionTitle}>
+        <View style={[styles.section, { backgroundColor: theme.backgroundDefault }]}>
+          <ThemedText type="h4" style={styles.sectionTitle}>
             Local Storage
           </ThemedText>
           <ThemedText style={styles.paragraph}>
@@ -77,8 +77,8 @@ export default function PrivacyScreen() {
           </ThemedText>
         </View>
 
-        <View style={[styles.section, { backgroundColor: theme.backgroundElevated }]}>
-          <ThemedText type="subtitle" style={styles.sectionTitle}>
+        <View style={[styles.section, { backgroundColor: theme.backgroundDefault }]}>
+          <ThemedText type="h4" style={styles.sectionTitle}>
             Third-Party Services
           </ThemedText>
           <ThemedText style={styles.paragraph}>
@@ -87,8 +87,8 @@ export default function PrivacyScreen() {
           </ThemedText>
         </View>
 
-        <View style={[styles.section, { backgroundColor: theme.backgroundElevated }]}>
-          <ThemedText type="subtitle" style={styles.sectionTitle}>
+        <View style={[styles.section, { backgroundColor: theme.backgroundDefault }]}>
+          <ThemedText type="h4" style={styles.sectionTitle}>
             Data Deletion
           </ThemedText>
           <ThemedText style={styles.paragraph}>
@@ -97,8 +97,8 @@ export default function PrivacyScreen() {
           </ThemedText>
         </View>
 
-        <View style={[styles.section, { backgroundColor: theme.backgroundElevated }]}>
-          <ThemedText type="subtitle" style={styles.sectionTitle}>
+        <View style={[styles.section, { backgroundColor: theme.backgroundDefault }]}>
+          <ThemedText type="h4" style={styles.sectionTitle}>
             Children's Privacy
           </ThemedText>
           <ThemedText style={styles.paragraph}>
@@ -107,8 +107,8 @@ export default function PrivacyScreen() {
           </ThemedText>
         </View>
 
-        <View style={[styles.section, { backgroundColor: theme.backgroundElevated }]}>
-          <ThemedText type="subtitle" style={styles.sectionTitle}>
+        <View style={[styles.section, { backgroundColor: theme.backgroundDefault }]}>
+          <ThemedText type="h4" style={styles.sectionTitle}>
             Changes to This Policy
           </ThemedText>
           <ThemedText style={styles.paragraph}>
@@ -118,8 +118,8 @@ export default function PrivacyScreen() {
           </ThemedText>
         </View>
 
-        <View style={[styles.section, { backgroundColor: theme.backgroundElevated }]}>
-          <ThemedText type="subtitle" style={styles.sectionTitle}>
+        <View style={[styles.section, { backgroundColor: theme.backgroundDefault }]}>
+          <ThemedText type="h4" style={styles.sectionTitle}>
             Contact
           </ThemedText>
           <ThemedText style={styles.paragraph}>

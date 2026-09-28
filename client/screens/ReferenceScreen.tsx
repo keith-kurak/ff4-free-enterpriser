@@ -1,22 +1,19 @@
 import React from "react";
 import { ScrollView, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useHeaderHeight } from "@react-navigation/elements";
-import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import { useRouter } from "expo-router";
+import { useHeaderHeight } from "expo-router/react-navigation";
+import { useBottomTabBarHeight } from "expo-router/js-tabs";
 import { Feather } from "@expo/vector-icons";
 
 import { Card } from "@/components/Card";
 import { ThemedText } from "@/components/ThemedText";
 import { useTheme } from "@/hooks/useTheme";
 import { Spacing } from "@/constants/theme";
-import { ReferenceStackParamList } from "@/navigation/ReferenceStackNavigator";
 import { getVanillaStory, getShops, getKeyItems, getFEKeyItems, getFEKeyItemLocations } from "@/lib/data";
 
-type NavigationProp = NativeStackNavigationProp<ReferenceStackParamList>;
 
 export default function ReferenceScreen() {
-  const navigation = useNavigation<NavigationProp>();
+  const router = useRouter();
   const headerHeight = useHeaderHeight();
   const tabBarHeight = useBottomTabBarHeight();
   const { theme } = useTheme();
@@ -40,7 +37,7 @@ export default function ReferenceScreen() {
     >
       <Card
         elevation={1}
-        onPress={() => navigation.navigate("VanillaStory")}
+        onPress={() => router.push("/reference/vanilla-story")}
         style={styles.card}
       >
         <Feather name="book-open" size={24} color={theme.primary} />
@@ -60,7 +57,7 @@ export default function ReferenceScreen() {
 
       <Card
         elevation={1}
-        onPress={() => navigation.navigate("ShopLocations")}
+        onPress={() => router.push("/reference/shops")}
         style={styles.card}
       >
         <Feather name="shopping-cart" size={24} color={theme.primary} />
@@ -80,7 +77,7 @@ export default function ReferenceScreen() {
 
       <Card
         elevation={1}
-        onPress={() => navigation.navigate("VanillaKeyItemLocations")}
+        onPress={() => router.push("/reference/vanilla-key-items")}
         style={styles.card}
       >
         <Feather name="map-pin" size={24} color={theme.primary} />
@@ -100,7 +97,7 @@ export default function ReferenceScreen() {
 
       <Card
         elevation={1}
-        onPress={() => navigation.navigate("FEKeyItems")}
+        onPress={() => router.push("/reference/fe-key-items")}
         style={styles.card}
       >
         <Feather name="key" size={24} color={theme.primary} />
@@ -120,7 +117,7 @@ export default function ReferenceScreen() {
 
       <Card
         elevation={1}
-        onPress={() => navigation.navigate("FEKeyItemLocations")}
+        onPress={() => router.push("/reference/fe-key-item-locations")}
         style={styles.card}
       >
         <Feather name="star" size={24} color={theme.primary} />

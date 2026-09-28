@@ -1,9 +1,8 @@
 import React, { useState, useCallback } from "react";
 import { View, FlatList, StyleSheet, RefreshControl } from "react-native";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useHeaderHeight } from "@react-navigation/elements";
-import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import { useFocusEffect, useRouter } from "expo-router";
+import { useHeaderHeight } from "expo-router/react-navigation";
+import { useBottomTabBarHeight } from "expo-router/js-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Feather } from "@expo/vector-icons";
 
@@ -12,14 +11,12 @@ import { ThemedView } from "@/components/ThemedView";
 import { Card } from "@/components/Card";
 import { useTheme } from "@/hooks/useTheme";
 import { Spacing } from "@/constants/theme";
-import { HistoryStackParamList } from "@/navigation/HistoryStackNavigator";
 import { CompletedRun } from "@/types";
 import { getCompletedRuns } from "@/lib/storage";
 
-type NavigationProp = NativeStackNavigationProp<HistoryStackParamList>;
 
 export default function HistoryScreen() {
-  const navigation = useNavigation<NavigationProp>();
+  const router = useRouter();
   const headerHeight = useHeaderHeight();
   const tabBarHeight = useBottomTabBarHeight();
   const insets = useSafeAreaInsets();
@@ -59,7 +56,7 @@ export default function HistoryScreen() {
   const renderItem = ({ item }: { item: CompletedRun }) => (
     <Card
       elevation={1}
-      onPress={() => navigation.navigate("RunDetail", { runId: item.id })}
+      onPress={() => router.push({ pathname: "/history/[runId]", params: { runId: item.id } })}
       style={styles.card}
     >
       <View style={styles.cardHeader}>
