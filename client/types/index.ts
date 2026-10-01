@@ -111,3 +111,30 @@ export const CHARACTERS = [
 ] as const;
 
 export type Character = typeof CHARACTERS[number];
+
+// Runs created from a Free Enterprise flagset. The types above (ActiveRun,
+// CompletedRun, RunFlags) are the legacy format and are kept only for history.
+export type FlagInputMethod = 'flagset' | 'code' | 'manual';
+
+export interface Run {
+  schemaVersion: 2;
+  id: string;
+  name: string;
+  /** How the flags were entered. */
+  inputMethod: FlagInputMethod;
+  /** The text the user entered, as entered. Empty for manual runs. */
+  input: string;
+  /** Canonical flag text. For manual runs, only the flags that were entered. */
+  flags: string;
+  /** The ff4fe.com flag code ("b..."). Null for manual runs. */
+  flagCode: string | null;
+  /** The Free Enterprise version the flags were read with, e.g. "4.6.0". */
+  feVersion: string;
+  startedAt: string;
+  completedAt?: string;
+  completionTime?: string;
+  keyItemsCollected?: number;
+  treasureChests?: number;
+  characterCount?: number;
+  finalParty?: string[];
+}

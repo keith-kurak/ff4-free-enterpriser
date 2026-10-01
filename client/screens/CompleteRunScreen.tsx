@@ -10,8 +10,8 @@ import { ThemedText } from "@/components/ThemedText";
 import { KeyboardAwareScrollViewCompat } from "@/components/KeyboardAwareScrollViewCompat";
 import { useTheme } from "@/hooks/useTheme";
 import { Spacing, BorderRadius } from "@/constants/theme";
-import { ActiveRun, CompletedRun, CHARACTERS, Character } from "@/types";
-import { getActiveRun, clearActiveRun, saveCompletedRun } from "@/lib/storage";
+import { Run, CHARACTERS, Character } from "@/types";
+import { getCurrentRun, completeRun } from "@/lib/runs";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 
@@ -21,7 +21,7 @@ export default function CompleteRunScreen() {
   const insets = useSafeAreaInsets();
   const { theme } = useTheme();
 
-  const [activeRun, setActiveRun] = useState<ActiveRun | null>(null);
+  const [activeRun, setActiveRun] = useState<Run | null>(null);
   const [completionTime, setCompletionTime] = useState("");
   const [keyItemsCollected, setKeyItemsCollected] = useState("");
   const [treasureChests, setTreasureChests] = useState("");
@@ -33,7 +33,7 @@ export default function CompleteRunScreen() {
   }, []);
 
   const loadActiveRun = async () => {
-    const run = await getActiveRun();
+    const run = await getCurrentRun();
     setActiveRun(run);
   };
 
@@ -51,23 +51,17 @@ export default function CompleteRunScreen() {
 
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 
-    const completedRun: CompletedRun = {
-      id: activeRun.id,
-      name: activeRun.name,
-      flags: activeRun.flags,
+    const completedRun: Run = {
+      ...activeRun,
       completionTime: completionTime.trim(),
       keyItemsCollected: keyItemsCollected ? parseInt(keyItemsCollected, 10) : undefined,
       treasureChests: treasureChests ? parseInt(treasureChests, 10) : undefined,
       characterCount: characterCount ? parseInt(characterCount, 10) : undefined,
       finalParty: selectedCharacters,
-      shopVisits: activeRun.shopVisits,
-      keyItemChecks: activeRun.keyItemChecks,
       completedAt: new Date().toISOString(),
-      startedAt: activeRun.startedAt,
     };
 
-    await saveCompletedRun(completedRun);
-    await clearActiveRun();
+    await completeRun(completedRun);
     navigation.goBack();
   }, [activeRun, completionTime, keyItemsCollected, treasureChests, characterCount, selectedCharacters, navigation]);
 

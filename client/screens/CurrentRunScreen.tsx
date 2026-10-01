@@ -1,5 +1,11 @@
-import React, { useState, useCallback } from "react";
-import { View, ScrollView, StyleSheet, RefreshControl, Alert } from "react-native";
+import React, { useState, useCallback, useMemo } from "react";
+import {
+  View,
+  ScrollView,
+  StyleSheet,
+  RefreshControl,
+  Alert,
+} from "react-native";
 import { useFocusEffect, useRouter } from "expo-router";
 import { useHeaderHeight } from "expo-router/react-navigation";
 import { useBottomTabBarHeight } from "expo-router/js-tabs";
@@ -9,14 +15,22 @@ import * as Haptics from "expo-haptics";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Button } from "@/components/Button";
-import { CollapsibleSection } from "@/components/CollapsibleSection";
-import { CheckboxRow } from "@/components/CheckboxRow";
+import {
+  FlagStringView,
+  RuleSectionsView,
+  TrackingSummaryView,
+} from "@/components/RunRulesView";
 import { useTheme } from "@/hooks/useTheme";
 import { Spacing } from "@/constants/theme";
-import { ActiveRun, Shop, FEKeyItemLocation } from "@/types";
-import { getActiveRun, saveActiveRun, clearActiveRun } from "@/lib/storage";
-import { getShopsByLocation, getShops, getFEKeyItemLocationsByLocation, getFEKeyItemLocations } from "@/lib/data";
+import { Run } from "@/types";
+import { getCurrentRun, clearCurrentRun } from "@/lib/runs";
+import { rulesForRun } from "@/lib/fe/rules";
 
+const METHOD_LABELS: Record<Run["inputMethod"], string> = {
+  flagset: "From flagset",
+  code: "From flag code",
+  manual: "Manual flags",
+};
 
 export default function CurrentRunScreen() {
   const router = useRouter();
@@ -24,20 +38,19 @@ export default function CurrentRunScreen() {
   const tabBarHeight = useBottomTabBarHeight();
   const { theme } = useTheme();
 
-  const [activeRun, setActiveRun] = useState<ActiveRun | null>(null);
+  const [run, setRun] = useState<Run | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
   const loadRun = useCallback(async () => {
-    const run = await getActiveRun();
-    setActiveRun(run);
+    setRun(await getCurrentRun());
     setLoading(false);
   }, []);
 
   useFocusEffect(
     useCallback(() => {
       loadRun();
-    }, [loadRun])
+    }, [loadRun]),
   );
 
   const onRefresh = useCallback(async () => {
@@ -46,65 +59,12 @@ export default function CurrentRunScreen() {
     setRefreshing(false);
   }, [loadRun]);
 
-  const handleShopToggle = async (shopId: string, field: 'visited' | 'returnTo') => {
-    if (!activeRun) return;
-
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-
-    const updatedVisits = activeRun.shopVisits.map((sv) => {
-      if (sv.shopId === shopId) {
-        return { ...sv, [field]: !sv[field] };
-      }
-      return sv;
-    });
-
-    const updatedRun = { ...activeRun, shopVisits: updatedVisits };
-    setActiveRun(updatedRun);
-    await saveActiveRun(updatedRun);
-  };
-
-  const handleKeyItemToggle = async (keyItemId: string) => {
-    if (!activeRun) return;
-
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-
-    const updatedChecks = activeRun.keyItemChecks.map((kic) => {
-      if (kic.keyItemId === keyItemId) {
-        return { ...kic, checked: !kic.checked };
-      }
-      return kic;
-    });
-
-    const updatedRun = { ...activeRun, keyItemChecks: updatedChecks };
-    setActiveRun(updatedRun);
-    await saveActiveRun(updatedRun);
-  };
-
-  const handleKeyItemReturnToggle = async (keyItemId: string) => {
-    if (!activeRun) return;
-
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-
-    const updatedChecks = activeRun.keyItemChecks.map((kic) => {
-      if (kic.keyItemId === keyItemId) {
-        return { ...kic, returnTo: !kic.returnTo };
-      }
-      return kic;
-    });
-
-    const updatedRun = { ...activeRun, keyItemChecks: updatedChecks };
-    setActiveRun(updatedRun);
-    await saveActiveRun(updatedRun);
-  };
-
-  const handleCompleteRun = () => {
-    router.push("/current/complete");
-  };
+  const rules = useMemo(() => (run ? rulesForRun(run) : null), [run]);
 
   const handleCancelRun = () => {
     Alert.alert(
       "Cancel Run",
-      "Are you sure you want to cancel this run? All progress will be lost.",
+      "Are you sure you want to cancel this run? It will not be saved to history.",
       [
         { text: "Keep Running", style: "cancel" },
         {
@@ -112,11 +72,11 @@ export default function CurrentRunScreen() {
           style: "destructive",
           onPress: async () => {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-            await clearActiveRun();
-            setActiveRun(null);
+            await clearCurrentRun();
+            setRun(null);
           },
         },
-      ]
+      ],
     );
   };
 
@@ -130,11 +90,16 @@ export default function CurrentRunScreen() {
     );
   }
 
-  if (!activeRun) {
+  if (!run) {
     return (
       <ThemedView style={[styles.container, { paddingTop: headerHeight }]}>
         <View style={styles.emptyState}>
-          <View style={[styles.emptyIcon, { backgroundColor: theme.primary + "1A" }]}>
+          <View
+            style={[
+              styles.emptyIcon,
+              { backgroundColor: theme.primary + "1A" },
+            ]}
+          >
             <Feather name="play-circle" size={48} color={theme.primary} />
           </View>
           <ThemedText type="h4" style={styles.emptyTitle}>
@@ -144,7 +109,7 @@ export default function CurrentRunScreen() {
             type="small"
             style={[styles.emptyDescription, { color: theme.textSecondary }]}
           >
-            Start a new Free Enterprise run to track your progress
+            Start a new Free Enterprise run from your flagset to see its rules
           </ThemedText>
           <Button
             onPress={() => router.push("/current/new")}
@@ -156,30 +121,6 @@ export default function CurrentRunScreen() {
       </ThemedView>
     );
   }
-
-  const shopsByLocation = getShopsByLocation();
-  const allShops = getShops();
-  const allKeyItemLocations = getFEKeyItemLocations();
-  const keyItemLocationsByLocation = getFEKeyItemLocationsByLocation(activeRun.flags);
-
-  const getShopVisit = (shopId: string) => {
-    return activeRun.shopVisits.find((sv) => sv.shopId === shopId);
-  };
-
-  const getKeyItemCheck = (keyItemId: string) => {
-    return activeRun.keyItemChecks.find((kic) => kic.keyItemId === keyItemId);
-  };
-
-  const getShopById = (shopId: string): Shop | undefined => {
-    return allShops.find((s) => s.id === shopId);
-  };
-
-  const getKeyItemLocationById = (keyItemId: string): FEKeyItemLocation | undefined => {
-    return allKeyItemLocations.find((ki) => ki.id === keyItemId);
-  };
-
-  const shopLocations = Array.from(shopsByLocation.keys());
-  const keyItemLocations = Array.from(keyItemLocationsByLocation.keys());
 
   return (
     <ScrollView
@@ -196,95 +137,42 @@ export default function CurrentRunScreen() {
       }
     >
       <View style={styles.header}>
-        <ThemedText type="h4">{activeRun.name}</ThemedText>
-        <Button onPress={handleCompleteRun} style={styles.completeButton}>
+        <View style={styles.headerText}>
+          <ThemedText type="h4">{run.name}</ThemedText>
+          <ThemedText type="small" style={{ color: theme.textSecondary }}>
+            {METHOD_LABELS[run.inputMethod]} · FE v{run.feVersion}
+          </ThemedText>
+        </View>
+        <Button
+          onPress={() => router.push("/current/complete")}
+          style={styles.completeButton}
+        >
           Complete Run
         </Button>
       </View>
 
-      <View style={styles.flagsSummary}>
-        <ThemedText type="small" style={{ color: theme.textSecondary }}>
-          Flags:{" "}
-          {[
-            activeRun.flags.summonQuestRewards && "Summon",
-            activeRun.flags.lunarSubterraneBosses && "Lunar",
-            activeRun.flags.monsterInABox && "MIAB",
-            activeRun.flags.freeItemToroia && "Toroia",
-          ]
-            .filter(Boolean)
-            .join(", ") || "None"}
-        </ThemedText>
-      </View>
-
-      <View style={styles.instructionNote}>
-        <Feather name="info" size={14} color={theme.textSecondary} />
-        <ThemedText type="small" style={{ color: theme.textSecondary }}>
-          Long-press any item to mark it as "return later"
-        </ThemedText>
-      </View>
-
-      <CollapsibleSection title="Shops">
-        {shopLocations.map((location) => {
-          const shops = shopsByLocation.get(location) || [];
-          return (
-            <View key={location} style={styles.locationGroup}>
-              <ThemedText
-                type="small"
-                style={[styles.locationHeader, { color: theme.textSecondary }]}
-              >
-                {location}
-              </ThemedText>
-              {shops.map((shop) => {
-                const visit = getShopVisit(shop.id);
-                return (
-                  <CheckboxRow
-                    key={shop.id}
-                    label={shop.name}
-                    checked={visit?.visited || false}
-                    onToggle={() => handleShopToggle(shop.id, "visited")}
-                    showReturn={visit?.returnTo || false}
-                    returnChecked={visit?.returnTo || false}
-                    onLongPress={() => handleShopToggle(shop.id, "returnTo")}
-                  />
-                );
-              })}
+      {rules ? (
+        <>
+          <TrackingSummaryView groups={rules.tracking} />
+          {run.inputMethod !== "manual" ? (
+            <View style={styles.section}>
+              <ThemedText type="h4">All rules</ThemedText>
+              <RuleSectionsView sections={rules.sections} />
             </View>
-          );
-        })}
-      </CollapsibleSection>
+          ) : null}
+        </>
+      ) : (
+        <ThemedText type="body" style={{ color: theme.danger }}>
+          The flags for this run cannot be read.
+        </ThemedText>
+      )}
 
-      <CollapsibleSection title="Key Item Locations" defaultExpanded>
-        {keyItemLocations.map((location) => {
-          const items = keyItemLocationsByLocation.get(location) || [];
-          return (
-            <View key={location} style={styles.locationGroup}>
-              <ThemedText
-                type="small"
-                style={[styles.locationHeader, { color: theme.textSecondary }]}
-              >
-                {location}
-              </ThemedText>
-              {items.map((item) => {
-                const check = getKeyItemCheck(item.id);
-                const label = item.miab_chest_count
-                  ? `${item.miab_chest_count} monster-in-a-box chests`
-                  : item.check;
-                return (
-                  <CheckboxRow
-                    key={item.id}
-                    label={label}
-                    checked={check?.checked || false}
-                    onToggle={() => handleKeyItemToggle(item.id)}
-                    showReturn={check?.returnTo || false}
-                    returnChecked={check?.returnTo || false}
-                    onLongPress={() => handleKeyItemReturnToggle(item.id)}
-                  />
-                );
-              })}
-            </View>
-          );
-        })}
-      </CollapsibleSection>
+      <View style={styles.section}>
+        <FlagStringView label="Flags" value={run.flags} />
+        {run.flagCode ? (
+          <FlagStringView label="Flag code" value={run.flagCode} />
+        ) : null}
+      </View>
 
       <View style={styles.cancelContainer}>
         <Button
@@ -345,19 +233,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    gap: Spacing.md,
+  },
+  headerText: {
+    flex: 1,
+    gap: Spacing.xs,
   },
   completeButton: {
     paddingHorizontal: Spacing.xl,
   },
-  flagsSummary: {
-    marginTop: -Spacing.sm,
-  },
-  locationGroup: {
-    marginBottom: Spacing.md,
-  },
-  locationHeader: {
-    marginBottom: Spacing.xs,
-    fontWeight: "600",
+  section: {
+    gap: Spacing.sm,
   },
   cancelContainer: {
     marginTop: Spacing.xl,
@@ -365,10 +251,5 @@ const styles = StyleSheet.create({
   },
   cancelButton: {
     paddingHorizontal: Spacing["3xl"],
-  },
-  instructionNote: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: Spacing.xs,
   },
 });

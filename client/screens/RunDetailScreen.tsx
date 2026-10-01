@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { View, ScrollView, StyleSheet, Alert } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useHeaderHeight } from "expo-router/react-navigation";
@@ -12,8 +12,15 @@ import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
 import { useTheme } from "@/hooks/useTheme";
 import { Spacing, BorderRadius } from "@/constants/theme";
-import { CompletedRun } from "@/types";
+import { FlagStringView, RuleSectionsView, TrackingSummaryView } from "@/components/RunRulesView";
+import { CompletedRun, Run } from "@/types";
 import { getCompletedRuns, deleteCompletedRun } from "@/lib/storage";
+import { getRuns, deleteRun } from "@/lib/runs";
+import { rulesForRun } from "@/lib/fe/rules";
+
+function isLegacyRun(run: CompletedRun | Run): run is CompletedRun {
+  return !("schemaVersion" in run);
+}
 
 
 export default function RunDetailScreen() {
@@ -23,15 +30,16 @@ export default function RunDetailScreen() {
   const insets = useSafeAreaInsets();
   const { theme } = useTheme();
 
-  const [run, setRun] = useState<CompletedRun | null>(null);
+  const [run, setRun] = useState<CompletedRun | Run | null>(null);
 
   useEffect(() => {
     loadRun();
   }, [runId]);
 
   const loadRun = async () => {
-    const runs = await getCompletedRuns();
-    const found = runs.find((r) => r.id === runId);
+    const found =
+      (await getRuns()).find((r) => r.id === runId) ??
+      (await getCompletedRuns()).find((r) => r.id === runId);
     setRun(found || null);
   };
 
@@ -46,7 +54,8 @@ export default function RunDetailScreen() {
           style: "destructive",
           onPress: async () => {
             Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
-            await deleteCompletedRun(runId);
+            if (run && isLegacyRun(run)) await deleteCompletedRun(runId);
+            else await deleteRun(runId);
             router.back();
           },
         },
@@ -72,6 +81,8 @@ export default function RunDetailScreen() {
     });
   };
 
+  const rules = useMemo(() => (run && !isLegacyRun(run) ? rulesForRun(run) : null), [run]);
+
   if (!run) {
     return (
       <ThemedView style={[styles.container, { paddingTop: headerHeight }]}>
@@ -82,9 +93,7 @@ export default function RunDetailScreen() {
     );
   }
 
-  const shopsVisited = run.shopVisits.filter((sv) => sv.visited).length;
-  const shopsToReturn = run.shopVisits.filter((sv) => sv.returnTo).length;
-  const keyItemsChecked = run.keyItemChecks.filter((kic) => kic.checked).length;
+  const finalParty = run.finalParty ?? [];
 
   return (
     <ScrollView
@@ -99,7 +108,9 @@ export default function RunDetailScreen() {
     >
       <ThemedText type="h3">{run.name}</ThemedText>
       <ThemedText type="small" style={{ color: theme.textSecondary }}>
-        Completed {formatDate(run.completedAt)} at {formatTime(run.completedAt)}
+        {run.completedAt
+          ? `Completed ${formatDate(run.completedAt)} at ${formatTime(run.completedAt)}`
+          : null}
       </ThemedText>
 
       <Card elevation={1} style={styles.statsCard}>
@@ -132,13 +143,13 @@ export default function RunDetailScreen() {
         </View>
       </View>
 
-      {run.finalParty.length > 0 ? (
+      {finalParty.length > 0 ? (
         <View style={styles.section}>
           <ThemedText type="body" style={styles.sectionTitle}>
             Final Party
           </ThemedText>
           <View style={styles.partyRow}>
-            {run.finalParty.map((character) => (
+            {finalParty.map((character) => (
               <View
                 key={character}
                 style={[styles.partyBadge, { backgroundColor: theme.primary + "1A" }]}
@@ -152,6 +163,47 @@ export default function RunDetailScreen() {
         </View>
       ) : null}
 
+      {isLegacyRun(run) ? (
+        <LegacyRunDetails run={run} />
+      ) : (
+        <>
+          {rules ? (
+            <>
+              <TrackingSummaryView groups={rules.tracking} />
+              {run.inputMethod !== "manual" ? (
+                <View style={styles.section}>
+                  <ThemedText type="body" style={styles.sectionTitle}>
+                    All rules
+                  </ThemedText>
+                  <RuleSectionsView sections={rules.sections} />
+                </View>
+              ) : null}
+            </>
+          ) : null}
+          <View style={styles.section}>
+            <FlagStringView label="Flags" value={run.flags} />
+            {run.flagCode ? <FlagStringView label="Flag code" value={run.flagCode} /> : null}
+          </View>
+        </>
+      )}
+
+      <Button
+        onPress={handleDelete}
+        style={[styles.deleteButton, { backgroundColor: theme.danger }]}
+      >
+        Delete Run
+      </Button>
+    </ScrollView>
+  );
+}
+
+function LegacyRunDetails({ run }: { run: CompletedRun }) {
+  const { theme } = useTheme();
+  const shopsVisited = run.shopVisits.filter((sv) => sv.visited).length;
+  const keyItemsChecked = run.keyItemChecks.filter((kic) => kic.checked).length;
+
+  return (
+    <>
       <View style={styles.section}>
         <ThemedText type="body" style={styles.sectionTitle}>
           Run Flags
@@ -207,14 +259,7 @@ export default function RunDetailScreen() {
           </View>
         </View>
       </View>
-
-      <Button
-        onPress={handleDelete}
-        style={[styles.deleteButton, { backgroundColor: theme.danger }]}
-      >
-        Delete Run
-      </Button>
-    </ScrollView>
+    </>
   );
 }
 

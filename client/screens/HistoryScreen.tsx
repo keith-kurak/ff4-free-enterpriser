@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { View, FlatList, StyleSheet, RefreshControl } from "react-native";
+import { View, SectionList, StyleSheet, RefreshControl } from "react-native";
 import { useFocusEffect, useRouter } from "expo-router";
 import { useHeaderHeight } from "expo-router/react-navigation";
 import { useBottomTabBarHeight } from "expo-router/js-tabs";
@@ -11,8 +11,11 @@ import { ThemedView } from "@/components/ThemedView";
 import { Card } from "@/components/Card";
 import { useTheme } from "@/hooks/useTheme";
 import { Spacing } from "@/constants/theme";
-import { CompletedRun } from "@/types";
+import { CompletedRun, Run } from "@/types";
 import { getCompletedRuns } from "@/lib/storage";
+import { getRuns } from "@/lib/runs";
+
+type HistorySection = { title: string; subtitle?: string; data: (Run | CompletedRun)[] };
 
 
 export default function HistoryScreen() {
@@ -22,13 +25,15 @@ export default function HistoryScreen() {
   const insets = useSafeAreaInsets();
   const { theme } = useTheme();
 
-  const [runs, setRuns] = useState<CompletedRun[]>([]);
+  const [runs, setRuns] = useState<Run[]>([]);
+  const [legacyRuns, setLegacyRuns] = useState<CompletedRun[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
   const loadRuns = useCallback(async () => {
-    const data = await getCompletedRuns();
-    setRuns(data);
+    const [current, legacy] = await Promise.all([getRuns(), getCompletedRuns()]);
+    setRuns(current);
+    setLegacyRuns(legacy);
     setLoading(false);
   }, []);
 
@@ -53,7 +58,7 @@ export default function HistoryScreen() {
     });
   };
 
-  const renderItem = ({ item }: { item: CompletedRun }) => (
+  const renderItem = ({ item }: { item: Run | CompletedRun }) => (
     <Card
       elevation={1}
       onPress={() => router.push({ pathname: "/history/[runId]", params: { runId: item.id } })}
@@ -71,7 +76,7 @@ export default function HistoryScreen() {
         </View>
       </View>
       <ThemedText type="small" style={{ color: theme.textSecondary }}>
-        {formatDate(item.completedAt)}
+        {item.completedAt ? formatDate(item.completedAt) : ""}
       </ThemedText>
       <View style={styles.statsRow}>
         {item.keyItemsCollected !== undefined ? (
@@ -82,7 +87,7 @@ export default function HistoryScreen() {
             </ThemedText>
           </View>
         ) : null}
-        {item.finalParty.length > 0 ? (
+        {item.finalParty && item.finalParty.length > 0 ? (
           <View style={styles.stat}>
             <Feather name="users" size={12} color={theme.textSecondary} />
             <ThemedText type="small" style={{ color: theme.textSecondary }}>
@@ -104,7 +109,7 @@ export default function HistoryScreen() {
     );
   }
 
-  if (runs.length === 0) {
+  if (runs.length === 0 && legacyRuns.length === 0) {
     return (
       <ThemedView style={[styles.container, { paddingTop: headerHeight }]}>
         <View style={styles.emptyState}>
@@ -125,8 +130,20 @@ export default function HistoryScreen() {
     );
   }
 
+  const sections: HistorySection[] = [];
+  if (runs.length > 0 || legacyRuns.length === 0) {
+    sections.push({ title: "Runs", data: runs });
+  }
+  if (legacyRuns.length > 0) {
+    sections.push({
+      title: "Legacy Runs",
+      subtitle: "Tracked before runs used flagsets",
+      data: legacyRuns,
+    });
+  }
+
   return (
-    <FlatList
+    <SectionList<Run | CompletedRun, HistorySection>
       style={[styles.list, { backgroundColor: theme.backgroundRoot }]}
       contentContainerStyle={[
         styles.content,
@@ -136,9 +153,20 @@ export default function HistoryScreen() {
         },
       ]}
       scrollIndicatorInsets={{ bottom: insets.bottom }}
-      data={runs}
+      sections={sections}
       keyExtractor={(item) => item.id}
       renderItem={renderItem}
+      renderSectionHeader={({ section }) => (
+        <View style={styles.sectionHeader}>
+          <ThemedText type="h4">{section.title}</ThemedText>
+          {section.subtitle ? (
+            <ThemedText type="small" style={{ color: theme.textSecondary }}>
+              {section.subtitle}
+            </ThemedText>
+          ) : null}
+        </View>
+      )}
+      stickySectionHeadersEnabled={false}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
@@ -185,6 +213,10 @@ const styles = StyleSheet.create({
   },
   card: {
     gap: Spacing.xs,
+  },
+  sectionHeader: {
+    gap: Spacing.xs,
+    marginTop: Spacing.sm,
   },
   cardHeader: {
     flexDirection: "row",
